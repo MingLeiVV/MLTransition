@@ -10,6 +10,8 @@
 
 @interface MLSubmit : UIButton
 
+- (BOOL)loadEnd;
 
 
 @end
+

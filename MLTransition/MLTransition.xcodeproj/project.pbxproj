@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0457371BF1D664006C69A5 /* MLSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457361BF1D664006C69A5 /* MLSphere.m */; };
+		AB04573A1BF1E941006C69A5 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457391BF1E941006C69A5 /* SecondViewController.m */; };
+		AB0457401BF1ED4A006C69A5 /* UIViewController+MLSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AB04573F1BF1ED4A006C69A5 /* UIViewController+MLSegue.m */; };
+		AB0457431BF1F946006C69A5 /* MLTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457421BF1F946006C69A5 /* MLTransition.m */; };
 		AB1B963E1BF18C7B00966746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B963D1BF18C7B00966746 /* main.m */; };
 		AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96401BF18C7B00966746 /* AppDelegate.m */; };
 		AB1B96441BF18C7B00966746 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96431BF18C7B00966746 /* ViewController.m */; };
@@ -14,8 +18,8 @@
 		AB1B964C1BF18C7B00966746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1B964A1BF18C7B00966746 /* LaunchScreen.storyboard */; };
 		AB1B96571BF18C7B00966746 /* MLTransitionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96561BF18C7B00966746 /* MLTransitionTests.m */; };
 		AB1B96621BF18C7B00966746 /* MLTransitionUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96611BF18C7B00966746 /* MLTransitionUITests.m */; };
-		AB1B96711BF18C9200966746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1B96701BF18C9200966746 /* Main.storyboard */; };
 		AB1B96741BF18CAD00966746 /* MLSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96731BF18CAD00966746 /* MLSubmit.m */; };
+		AB1B96771BF18E3800966746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1B96761BF18E3800966746 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB0457351BF1D664006C69A5 /* MLSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSphere.h; sourceTree = "<group>"; };
+		AB0457361BF1D664006C69A5 /* MLSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSphere.m; sourceTree = "<group>"; };
+		AB0457381BF1E941006C69A5 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		AB0457391BF1E941006C69A5 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		AB04573E1BF1ED4A006C69A5 /* UIViewController+MLSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MLSegue.h"; sourceTree = "<group>"; };
+		AB04573F1BF1ED4A006C69A5 /* UIViewController+MLSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MLSegue.m"; sourceTree = "<group>"; };
+		AB0457411BF1F946006C69A5 /* MLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransition.h; sourceTree = "<group>"; };
+		AB0457421BF1F946006C69A5 /* MLTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTransition.m; sourceTree = "<group>"; };
 		AB1B96391BF18C7B00966746 /* MLTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B963D1BF18C7B00966746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB1B963F1BF18C7B00966746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,9 +63,9 @@
 		AB1B965D1BF18C7B00966746 /* MLTransitionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLTransitionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B96611BF18C7B00966746 /* MLTransitionUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLTransitionUITests.m; sourceTree = "<group>"; };
 		AB1B96631BF18C7B00966746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB1B966F1BF18C9200966746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB1B96721BF18CAD00966746 /* MLSubmit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSubmit.h; sourceTree = "<group>"; };
 		AB1B96731BF18CAD00966746 /* MLSubmit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSubmit.m; sourceTree = "<group>"; };
+		AB1B96761BF18E3800966746 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +121,9 @@
 				AB1B96401BF18C7B00966746 /* AppDelegate.m */,
 				AB1B96421BF18C7B00966746 /* ViewController.h */,
 				AB1B96431BF18C7B00966746 /* ViewController.m */,
-				AB1B96701BF18C9200966746 /* Main.storyboard */,
+				AB0457381BF1E941006C69A5 /* SecondViewController.h */,
+				AB0457391BF1E941006C69A5 /* SecondViewController.m */,
+				AB1B96761BF18E3800966746 /* Main.storyboard */,
 				AB1B96481BF18C7B00966746 /* Assets.xcassets */,
 				AB1B964A1BF18C7B00966746 /* LaunchScreen.storyboard */,
 				AB1B964D1BF18C7B00966746 /* Info.plist */,
@@ -149,6 +163,12 @@
 			children = (
 				AB1B96721BF18CAD00966746 /* MLSubmit.h */,
 				AB1B96731BF18CAD00966746 /* MLSubmit.m */,
+				AB0457351BF1D664006C69A5 /* MLSphere.h */,
+				AB0457361BF1D664006C69A5 /* MLSphere.m */,
+				AB04573E1BF1ED4A006C69A5 /* UIViewController+MLSegue.h */,
+				AB04573F1BF1ED4A006C69A5 /* UIViewController+MLSegue.m */,
+				AB0457411BF1F946006C69A5 /* MLTransition.h */,
+				AB0457421BF1F946006C69A5 /* MLTransition.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -259,9 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB1B96711BF18C9200966746 /* Main.storyboard in Resources */,
 				AB1B964C1BF18C7B00966746 /* LaunchScreen.storyboard in Resources */,
 				AB1B96491BF18C7B00966746 /* Assets.xcassets in Resources */,
+				AB1B96771BF18E3800966746 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,8 +306,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB04573A1BF1E941006C69A5 /* SecondViewController.m in Sources */,
+				AB0457371BF1D664006C69A5 /* MLSphere.m in Sources */,
 				AB1B96441BF18C7B00966746 /* ViewController.m in Sources */,
 				AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */,
+				AB0457401BF1ED4A006C69A5 /* UIViewController+MLSegue.m in Sources */,
+				AB0457431BF1F946006C69A5 /* MLTransition.m in Sources */,
 				AB1B96741BF18CAD00966746 /* MLSubmit.m in Sources */,
 				AB1B963E1BF18C7B00966746 /* main.m in Sources */,
 			);
@@ -331,15 +355,6 @@
 				AB1B964B1BF18C7B00966746 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		AB1B96701BF18C9200966746 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB1B966F1BF18C9200966746 /* Base */,
-			);
-			name = Main.storyboard;
-			path = ../../MLLoginTransition/MLLoginTransition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -516,6 +531,7 @@
 				AB1B96681BF18C7B00966746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB1B96691BF18C7B00966746 /* Build configuration list for PBXNativeTarget "MLTransitionTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +540,7 @@
 				AB1B966B1BF18C7B00966746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB1B966C1BF18C7B00966746 /* Build configuration list for PBXNativeTarget "MLTransitionUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +549,7 @@
 				AB1B966E1BF18C7B00966746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
