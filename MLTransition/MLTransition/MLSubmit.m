@@ -13,7 +13,7 @@
 @interface MLSubmit ()<UIViewControllerAnimatedTransitioning>
 
 @property(nonatomic ,strong)MLSphere *sphereARC;
-
+@property(nonatomic ,copy)Completion block;
 
 
 @end
@@ -21,16 +21,16 @@
 @implementation MLSubmit
 
 
-- (BOOL)loadEnd {
+- (void)loadEndCompletion:(Completion)completion{
 
+    _block = completion;
     [self jumpTransition];
-    
-    return YES;
 }
 - (void)jumpTransition {
 
     [_sphereARC stopAnimation];
     [_sphereARC removeFromSuperlayer];
+    self.userInteractionEnabled = YES;
     
     CABasicAnimation *windowSpecial = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     
@@ -127,6 +127,7 @@
     if ([animation.keyPath isEqualToString:@"transform.scale"]) {
         
         [self.layer removeAllAnimations];
+        _block();
     }
     
 }

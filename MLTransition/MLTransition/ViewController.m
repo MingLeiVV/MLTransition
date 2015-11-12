@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     [self creatSubmit];
+    
 }
 
 - (void)creatSubmit {
@@ -40,14 +41,10 @@
 
 - (void)login {
     
-    [self presentViewController:[[SecondViewController alloc]init] loadingDuration:1 transitionDuration:1 formViewAlpha:1 toViewAlpha:1 completion:nil];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self presentViewController:[[SecondViewController alloc]init] animated:YES completion:nil];
-//    });
     
-//    [_submit setLoadingDuration:2 transitionDuration:2 formViewAlpha:0 toViewAlpha:0.4 completion:^{
-//        
-//        
-//    }];
+    [self presentViewController:[[SecondViewController alloc]init] loadingDuration:2 transitionDuration:0.4 formViewAlpha:0.0 toViewAlpha:0.5 completion:nil];
+
+    
 }
+
 @end

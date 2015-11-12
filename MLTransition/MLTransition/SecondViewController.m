@@ -7,9 +7,10 @@
 //
 
 #import "SecondViewController.h"
+#import "UIViewController+MLSegue.h"
 
 @interface SecondViewController ()
-
+@property(nonatomic ,strong)UIImageView *imageView;
 @end
 
 @implementation SecondViewController
@@ -19,17 +20,33 @@
 
 
     [self setUp];
+    
 }
 
 - (void)setUp {
 
     UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Home"]];
     
-    [self.view addSubview:imageView];
+    self.imageView = imageView;
+    
+    [self.view addSubview:self.imageView];
+    
     
     imageView.frame = self.view.bounds;
     
-    imageView.userInteractionEnabled = YES;
+    self.imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
+    
+    tap.numberOfTapsRequired = 1;
+    
+    [self.view addGestureRecognizer:tap];
+    
+   
 }
 
+- (void)closeCurrentView {
+
+    [self dismissViewControllerTransitionDuration:0.5 formViewAlpha:1 toViewAlpha:0.2 completion:nil];
+}
 @end

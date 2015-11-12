@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^Completion)();
 @interface MLSubmit : UIButton
 
-- (BOOL)loadEnd;
+- (void)loadEndCompletion:(Completion)completion;
 
 
 @end
