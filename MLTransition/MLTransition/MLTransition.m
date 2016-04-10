@@ -87,21 +87,21 @@
         toView.alpha = _toAlpha;
         [containerView addSubview:toView];
         
-        CABasicAnimation *scale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-        CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-        CAAnimationGroup *group = [[CAAnimationGroup alloc]init];
-        rotation.fromValue = 0;
-        rotation.toValue = @(M_PI * 2);
-        scale.fromValue = @(1.0);
-        scale.toValue = @(0.1);
-        scale.repeatDuration = _transitionDuration;
-        rotation.repeatDuration = _transitionDuration;
-        rotation.repeatCount = 1;
-        scale.repeatCount = 1;
-        scale.removedOnCompletion = NO;
-        rotation.removedOnCompletion = NO;
-        group.animations = @[scale,rotation];
-        [formView.layer addAnimation:group forKey:@"group"];
+//        CABasicAnimation *scale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+//        CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//        CAAnimationGroup *group = [[CAAnimationGroup alloc]init];
+//        rotation.fromValue = 0;
+//        rotation.toValue = @(M_PI * 2);
+//        scale.fromValue = @(1.0);
+//        scale.toValue = @(0.1);
+//        scale.repeatDuration = _transitionDuration;
+//        rotation.repeatDuration = _transitionDuration;
+//        rotation.repeatCount = 1;
+//        scale.repeatCount = 1;
+//        scale.removedOnCompletion = NO;
+//        rotation.removedOnCompletion = NO;
+//        group.animations = @[scale,rotation];
+//        [formView.layer addAnimation:group forKey:@"group"];
         
         [UIView animateWithDuration:_transitionDuration animations:^{
             

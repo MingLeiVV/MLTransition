@@ -9,90 +9,63 @@
 #import "UIViewController+MLSegue.h"
 #import "MLSubmit.h"
 #import <objc/runtime.h>
-#import "MLTransition.h"
 
 @interface UIViewController ()
-
 @property(nonatomic ,copy) void(^block)();
+@property(nonatomic, assign)UIViewAnimationType animationType;
 @end
 
 static const char *blockKey = "blockKey";
-
-
-static double TransitionDuration;
-static double formAlphaV;
-static double toAlphaV;
+static const char *animationTypeKey = "animationTypeKey";
 
 @implementation UIViewController (MLSegue)
 
 
-- (void)presentViewController:(UIViewController *)viewController loadingDuration:(CGFloat)loadT transitionDuration:(CGFloat)transitionT formViewAlpha:(CGFloat)formAlpha toViewAlpha:(CGFloat)toAlpha completion:(Completion)completion {
-    
-    TransitionDuration = transitionT;
-    formAlphaV = formAlpha;
-    toAlphaV = toAlpha;
-    self.block = completion;
-
+- (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion{
     viewController.transitioningDelegate = self;
-    
-    UIView *subView = [self isHaveMLSubmit];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(loadT * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        typeof(self) __weak weakSelf = self;
-        if (subView) {
-            
-            MLSubmit *submit = (MLSubmit *)subView;
-            [submit loadEndCompletion:^{
-                [weakSelf presentViewController:viewController animated:YES completion:nil];
-  
-            }];
-        }
-        
-    });
-    
-    
+    self.animationType = animationType;
+    [self presentViewController:viewController animated:YES completion:completion];
 }
-
-- (void)dismissViewControllerTransitionDuration:(CGFloat)transitionT formViewAlpha:(CGFloat)formAlpha toViewAlpha:(CGFloat)toAlpha completion:(Completion)completion {
-
-    TransitionDuration = transitionT;
-    formAlphaV = formAlpha;
-    toAlphaV = toAlpha;
+- (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
+    self.transitioningDelegate = self;
+    self.animationType = animationType;
+    [self dismissViewControllerAnimated:YES completion:completion];
+}
+- (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion {
+    __weak typeof(self) weakSelf = self;
+    weakSelf.navigationController.delegate = self;
+    self.animationType = animationType;
     self.block = completion;
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
-
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
-
-       return [[MLTransition alloc]initTransitionDuration:TransitionDuration formViewAlpha:formAlphaV toViewAlpha:toAlphaV isDismiss:NO completion:self.block];
-    
+    source.transitioningDelegate = nil;
+    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-
-    return [[MLTransition alloc]initTransitionDuration:TransitionDuration formViewAlpha:formAlphaV toViewAlpha:toAlphaV isDismiss:YES completion:self.block];
+    dismissed.transitioningDelegate = nil;
+    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
 }
 
-- (UIView *)isHaveMLSubmit {
 
-    for (UIView *subView in self.view.subviews) {
-        
-        if ([subView isKindOfClass:[MLSubmit class]]) {
-            
-            return subView;
-        }
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    self.navigationController.delegate = nil;
+    if (operation == UINavigationControllerOperationPush) {
+        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
     }
-    
     return nil;
 }
 
-
 #pragma mark - Synthesis
+- (void)setAnimationType:(UIViewAnimationType)animationType {
+    objc_setAssociatedObject(self, animationTypeKey, @(animationType), OBJC_ASSOCIATION_ASSIGN);
+}
 
-
+- (UIViewAnimationType)animationType {
+    return [objc_getAssociatedObject(self, animationTypeKey) longValue];
+}
 - (void)setBlock:(void (^)())block {
     
     objc_setAssociatedObject(self, blockKey, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
@@ -104,3 +77,4 @@ static double toAlphaV;
 }
 
 @end
+

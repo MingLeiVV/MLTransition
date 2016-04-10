@@ -47,6 +47,6 @@
 
 - (void)closeCurrentView {
 
-    [self dismissViewControllerTransitionDuration:0.5 formViewAlpha:1 toViewAlpha:0.2 completion:nil];
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeZoom completion:nil];
 }
 @end
