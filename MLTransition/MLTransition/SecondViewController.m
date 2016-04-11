@@ -46,7 +46,7 @@
 }
 
 - (void)closeCurrentView {
-
+//[self pop]
     [self dismissViewcontrollerAnimationType:UIViewAnimationTypeZoom completion:nil];
 }
 @end

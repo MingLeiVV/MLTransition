@@ -35,7 +35,8 @@
     UIView *containerView = [transitionContext containerView];
     UIView *fromView = nil;
     UIView *toView = nil;
-    
+    UIViewController *formVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     if (isIOS8) {
         
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
@@ -45,10 +46,11 @@
         fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
+//    [self changeBar:toVc];
         [containerView addSubview:toView];
         animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type completion:^{
             [transitionContext completeTransition:YES];
         }];
-        animationBlock(fromView,toView);
+        animationBlock(fromView,toView,toVc.navigationController.navigationBar);
 }
 @end
