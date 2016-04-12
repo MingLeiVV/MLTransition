@@ -6,12 +6,12 @@
 //  Copyright © 2015年 磊. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-typedef void (^Completion)();
-@interface MLTransition : NSObject <UIViewControllerAnimatedTransitioning>
-
-
-- (instancetype)initTransitionDuration:(CFTimeInterval)transitionT formViewAlpha:(CGFloat)formAlpha toViewAlpha:(CGFloat)toAlpha isDismiss:(BOOL)isDismiss completion:(Completion)completion;
-
-@end
+#import "UIViewController+MLSegue.h"
+#import "UIViewController+CustomSegue.h"
+//typedef void (^Completion)();
+//@interface MLTransition : NSObject <UIViewControllerAnimatedTransitioning>
+//
+//
+//- (instancetype)initTransitionDuration:(CFTimeInterval)transitionT formViewAlpha:(CGFloat)formAlpha toViewAlpha:(CGFloat)toAlpha isDismiss:(BOOL)isDismiss completion:(Completion)completion;
+//
+//@end

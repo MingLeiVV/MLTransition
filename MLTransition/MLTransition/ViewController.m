@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "MLSubmit.h"
 #import "SecondViewController.h"
-#import "UIViewController+MLSegue.h"
+#import "MLTransition.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
 @interface ViewController ()
@@ -45,8 +45,8 @@
 - (void)login {
     
 //    [self presentViewController:[[SecondViewController alloc]init] loadingDuration:2 transitionDuration:0.4 formViewAlpha:0.0 toViewAlpha:0.5 completion:nil];
-    [self presentViewcontroller:[[SecondViewController alloc]init] animationType:UIViewAnimationTypeFall completion:nil];
-//    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeZoom completion:nil];
+//    [self presentViewcontroller:[[SecondViewController alloc]init] animationType:UIViewAnimationTypeFall completion:nil];
+    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeZoom];
     
 }
 @end

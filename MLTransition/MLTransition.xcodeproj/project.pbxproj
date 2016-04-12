@@ -10,7 +10,6 @@
 		AB0457371BF1D664006C69A5 /* MLSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457361BF1D664006C69A5 /* MLSphere.m */; };
 		AB04573A1BF1E941006C69A5 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457391BF1E941006C69A5 /* SecondViewController.m */; };
 		AB0457401BF1ED4A006C69A5 /* UIViewController+MLSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AB04573F1BF1ED4A006C69A5 /* UIViewController+MLSegue.m */; };
-		AB0457431BF1F946006C69A5 /* MLTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0457421BF1F946006C69A5 /* MLTransition.m */; };
 		AB1B963E1BF18C7B00966746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B963D1BF18C7B00966746 /* main.m */; };
 		AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96401BF18C7B00966746 /* AppDelegate.m */; };
 		AB1B96441BF18C7B00966746 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96431BF18C7B00966746 /* ViewController.m */; };
@@ -52,7 +51,6 @@
 		AB04573E1BF1ED4A006C69A5 /* UIViewController+MLSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MLSegue.h"; sourceTree = "<group>"; };
 		AB04573F1BF1ED4A006C69A5 /* UIViewController+MLSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MLSegue.m"; sourceTree = "<group>"; };
 		AB0457411BF1F946006C69A5 /* MLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransition.h; sourceTree = "<group>"; };
-		AB0457421BF1F946006C69A5 /* MLTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTransition.m; sourceTree = "<group>"; };
 		AB1B96391BF18C7B00966746 /* MLTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B963D1BF18C7B00966746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB1B963F1BF18C7B00966746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -176,6 +174,7 @@
 		AB1B96751BF18CE200966746 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				AB0457411BF1F946006C69A5 /* MLTransition.h */,
 				AB7D948F1CB790F2001A7947 /* UIView+Position.h */,
 				AB7D94901CB790F2001A7947 /* UIView+Position.m */,
 				AB1B96721BF18CAD00966746 /* MLSubmit.h */,
@@ -190,8 +189,6 @@
 				ABFD27701CA2A81F002E5334 /* MLTransitionAnimation.m */,
 				ABAB9A581CB67425004A36CE /* MLBridgeBlock.h */,
 				ABAB9A591CB67425004A36CE /* MLBridgeBlock.m */,
-				AB0457411BF1F946006C69A5 /* MLTransition.h */,
-				AB0457421BF1F946006C69A5 /* MLTransition.m */,
 				AB7D94921CB7AA2C001A7947 /* MLCustomTransition.h */,
 				AB7D94931CB7AA2C001A7947 /* MLCustomTransition.m */,
 			);
@@ -341,7 +338,6 @@
 				ABFD27711CA2A81F002E5334 /* MLTransitionAnimation.m in Sources */,
 				AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */,
 				AB0457401BF1ED4A006C69A5 /* UIViewController+MLSegue.m in Sources */,
-				AB0457431BF1F946006C69A5 /* MLTransition.m in Sources */,
 				AB1B96741BF18CAD00966746 /* MLSubmit.m in Sources */,
 				AB1B963E1BF18C7B00966746 /* main.m in Sources */,
 			);

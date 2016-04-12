@@ -7,6 +7,7 @@
 //
 
 #import "MLTransitionAnimation.h"
+#import "UIView+Position.h"
 #define isIOS8 [UIDevice currentDevice].systemVersion.doubleValue > 8.0
 
 @interface MLTransitionAnimation ()
@@ -35,7 +36,7 @@
     UIView *containerView = [transitionContext containerView];
     UIView *fromView = nil;
     UIView *toView = nil;
-    
+    UIViewController *toVc =[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     if (isIOS8) {
         
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
@@ -46,9 +47,17 @@
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
         [containerView addSubview:toView];
+        [self showTabBar:toVc];
         animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type completion:^{
             [transitionContext completeTransition:YES];
         }];
         animationBlock(fromView,toView);
+}
+- (void)showTabBar:(UIViewController *)showVc
+{
+    CGRect tabBarF = showVc.tabBarController.tabBar.frame;
+    CGRect navigationBarF = showVc.navigationController.navigationBar.frame;
+    showVc.tabBarController.tabBar.frame = CGRectMake(0, tabBarF.origin.y, tabBarF.size.width, tabBarF.size.height);
+    showVc.navigationController.navigationBar.frame = CGRectMake(0, navigationBarF.origin.y, navigationBarF.size.width, navigationBarF.size.height);
 }
 @end

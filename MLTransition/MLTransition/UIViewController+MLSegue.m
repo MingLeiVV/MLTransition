@@ -31,12 +31,14 @@ static const char *animationTypeKey = "animationTypeKey";
     self.animationType = animationType;
     [self dismissViewControllerAnimated:YES completion:completion];
 }
-- (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion {
+- (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType{
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animationType = animationType;
-    self.block = completion;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+- (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType {
+
 }
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
