@@ -17,7 +17,7 @@ typedef NS_OPTIONS(NSInteger, UIViewAnimationType) {
     UIViewAnimationTypeSlideOut = 1 << 4// 滑出
 };
 typedef void(^completion)();
-typedef void(^animationType)(UIView *fromView,UIView *toView);
+typedef void(^animationType)(UIView *fromView,UIView *toView,UIView *navigationBar);
 @interface MLBridgeBlock : NSObject
 + (animationType)mlGetAnimationWithType:(UIViewAnimationType)type completion:(completion)finish;
 @end
