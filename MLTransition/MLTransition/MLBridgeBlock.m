@@ -8,12 +8,16 @@
 
 #import "MLBridgeBlock.h"
 #import "UIView+Position.h"
+#define navigationBar toController.navigationController.navigationBar
 #define Duration 2
 #define UIScreen_Width [UIScreen mainScreen].bounds.size.width
 #define UIScreen_Height [UIScreen mainScreen].bounds.size.height
 #define movePosition 300
+
+NSInteger jumpType;
 @implementation MLBridgeBlock
-+ (animationType)mlGetAnimationWithType:(UIViewAnimationType)type completion:(completion)finish{
++ (animationType)mlGetAnimationWithType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType completion:(completion)finish{
+    jumpType = jumpType;
     switch (type) {
         case UIViewAnimationTypeGradient:
             return [self Gradient:finish];
@@ -35,7 +39,7 @@
 }
 + (animationType)Gradient:(completion)finish{
     
-    animationType gradient = ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType gradient = ^(UIView *fromView,UIView *toView,UIViewController *toController){
         fromView.alpha = 1.0;
         toView.alpha = 0.0;
         navigationBar.alpha = 0.0;
@@ -52,7 +56,7 @@
     return gradient;
 }
 + (animationType)Zoom:(completion)finish {
-    animationType zoom = ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType zoom = ^(UIView *fromView,UIView *toView,UIViewController *toController){
         CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         fromView.alpha = 0.5;
         toView.alpha = 0.5;
@@ -78,7 +82,7 @@
     return zoom;
 }
 + (animationType)Scale:(completion)finish {
-    animationType scale =  ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType scale =  ^(UIView *fromView,UIView *toView,UIViewController *toController){
         CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
@@ -104,7 +108,7 @@
     return scale;
 }
 + (animationType)Fall:(completion)finish {
-    animationType fall = ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType fall = ^(UIView *fromView,UIView *toView,UIViewController *toController){
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
@@ -127,7 +131,7 @@
     return fall;
 }
 + (animationType)SlideOut:(completion)finish {
-    animationType slideOut = ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType slideOut = ^(UIView *fromView,UIView *toView,UIViewController *toController){
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
@@ -152,7 +156,7 @@
 
 }
 + (animationType)None:(completion)finish {
-    animationType none = ^(UIView *fromView,UIView *toView,UIView *navigationBar){
+    animationType none = ^(UIView *fromView,UIView *toView,UIViewController *toController){
     };
     return none;
 }
@@ -160,6 +164,7 @@
     [toView.layer removeAllAnimations];
     [fromView removeFromSuperview];
 }
+
 + (CABasicAnimation *)getNavigationBar:(UIViewAnimationType)type {
     CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
     if (type == UIViewAnimationTypeFall) {

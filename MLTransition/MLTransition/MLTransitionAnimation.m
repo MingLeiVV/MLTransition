@@ -12,16 +12,18 @@
 
 @interface MLTransitionAnimation ()
 @property (nonatomic ,assign)UIViewAnimationType type;
+@property (nonatomic ,assign)UIViewControllerJumpType jumpType;
 @end
 @implementation MLTransitionAnimation
 
-+ (instancetype)mlTransitionWithAnimationType:(UIViewAnimationType)type {
-    return [[self alloc]initTransitionWithAnimationType:type ];
++ (instancetype)mlTransitionWithAnimationType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType{
+    return [[self alloc]initTransitionWithAnimationType:type jumpType:jumpType];
 }
-- (instancetype)initTransitionWithAnimationType:(UIViewAnimationType)type {
+- (instancetype)initTransitionWithAnimationType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType{
     self = [super init];
     if (self) {
         _type = type;
+        _jumpType = jumpType;
     }
     
     return self;
@@ -47,12 +49,11 @@
         fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
-//    [self changeBar:toVc];
         [containerView addSubview:toView];
         [self showTabBar:toVc];
-        animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type completion:^{
-            [transitionContext completeTransition:YES];
-        }];
+    animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^{
+        [transitionContext completeTransition:YES];
+    }];
         animationBlock(fromView,toView,toVc.navigationController.navigationBar);
 }
 - (void)showTabBar:(UIViewController *)showVc

@@ -38,24 +38,29 @@ static const char *animationTypeKey = "animationTypeKey";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 - (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType {
-
+    __weak typeof(self) weakSelf = self;
+    weakSelf.navigationController.delegate = self;
+    self.animationType = animationType;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
     source.transitioningDelegate = nil;
-    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
+    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePresent];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     dismissed.transitioningDelegate = nil;
-    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
+    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypeDismiss];
 }
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     self.navigationController.delegate = nil;
     if (operation == UINavigationControllerOperationPush) {
-        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType];
+        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePush];
+    } else if (operation == UINavigationControllerOperationPop) {
+        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePop];
     }
     return nil;
 }

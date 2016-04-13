@@ -10,16 +10,10 @@
 #import <UIKit/UIKit.h>
 #import "MLBridgeBlock.h"
 
-typedef NS_ENUM(NSInteger, UIViewControllerJumpType) {
-    UIViewControllerJumpTypePush,
-    UIViewControllerJumpTypePop,
-    UIViewControllerJumpTypeModal,
-    UIViewControllerJumpTypeDismiss
-};
 @interface MLTransitionAnimation : NSObject <UIViewControllerAnimatedTransitioning>
 
-+ (instancetype)mlTransitionWithAnimationType:(UIViewAnimationType)type;
-- (instancetype)initTransitionWithAnimationType:(UIViewAnimationType)type;
++ (instancetype)mlTransitionWithAnimationType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType;
+- (instancetype)initTransitionWithAnimationType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType;
 
 
 @end

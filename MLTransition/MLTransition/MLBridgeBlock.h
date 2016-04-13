@@ -16,8 +16,14 @@ typedef NS_OPTIONS(NSInteger, UIViewAnimationType) {
     UIViewAnimationTypeFall     = 1 << 3,// 落下
     UIViewAnimationTypeSlideOut = 1 << 4// 滑出
 };
+typedef NS_ENUM(NSInteger, UIViewControllerJumpType) {
+    UIViewControllerJumpTypePush,
+    UIViewControllerJumpTypePop,
+    UIViewControllerJumpTypePresent,
+    UIViewControllerJumpTypeDismiss
+};
 typedef void(^completion)();
-typedef void(^animationType)(UIView *fromView,UIView *toView,UIView *navigationBar);
+typedef void(^animationType)(UIView *fromView,UIView *toView,UIViewController *toController);
 @interface MLBridgeBlock : NSObject
-+ (animationType)mlGetAnimationWithType:(UIViewAnimationType)type completion:(completion)finish;
++ (animationType)mlGetAnimationWithType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType completion:(completion)finish;
 @end
