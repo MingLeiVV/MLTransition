@@ -52,7 +52,6 @@
 - (void)startAnimation {
     
     CABasicAnimation *start = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    
     start.fromValue = 0;
     
     start.toValue = @(2 * M_PI);

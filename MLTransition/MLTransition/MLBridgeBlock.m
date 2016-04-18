@@ -34,8 +34,17 @@ NSInteger jumpType;
             case UIViewAnimationTypeSlideOut:
             return [self SlideOut:finish];
             break;
+            case UIViewAnimationTypeFlip:
+            return [self Flip:finish];
+            break;
     }
     return [self None:finish];
+}
++ (void)transitionSeting:(UIViewController *)toController {
+    if (jumpType == UIViewControllerJumpTypePop) {
+        CGRect tabBarF = toController.tabBarController.tabBar.frame;
+        toController.tabBarController.tabBar.frame = CGRectMake(0, tabBarF.origin.y, tabBarF.size.width, tabBarF.size.height);
+    }
 }
 + (animationType)Gradient:(completion)finish{
     
@@ -109,6 +118,7 @@ NSInteger jumpType;
 }
 + (animationType)Fall:(completion)finish {
     animationType fall = ^(UIView *fromView,UIView *toView,UIViewController *toController){
+            [self transitionSeting:toController];
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
@@ -119,7 +129,10 @@ NSInteger jumpType;
         position.repeatCount         = 1;
         position.removedOnCompletion = NO;
         [toView.layer addAnimation:position forKey:position.keyPath];
+        
+        // 对导航条和tabBar条做相对应的处理
         [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeFall] forKey:position.keyPath];
+        
         [UIView animateWithDuration:Duration animations:^{
             toView.alpha = 1.0;
             navigationBar.alpha = 1.0;
@@ -132,6 +145,7 @@ NSInteger jumpType;
 }
 + (animationType)SlideOut:(completion)finish {
     animationType slideOut = ^(UIView *fromView,UIView *toView,UIViewController *toController){
+        [self transitionSeting:toController];
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
@@ -142,7 +156,9 @@ NSInteger jumpType;
         position.repeatCount         = 1;
         position.removedOnCompletion = NO;
         [fromView.layer addAnimation:position forKey:position.keyPath];
+        // 对导航条和tabBar条做相对应的处理
         [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeSlideOut] forKey:position.keyPath];
+        
         [UIView animateWithDuration:Duration animations:^{
             fromView.alpha = 0.0;
             toView.alpha = 1.0;
@@ -154,6 +170,31 @@ NSInteger jumpType;
     };
     return slideOut;
 
+}
+
++ (animationType)Flip:(completion)finish {
+animationType Flip = ^(UIView *fromView,UIView *toView,UIViewController *toController){
+    CABasicAnimation *rotate   = [CABasicAnimation animationWithKeyPath:@"transform.rotation.x"];
+    fromView.alpha = 1.0;
+    toView.alpha = 0.3;
+    navigationBar.alpha = 0.0;
+    rotate.fromValue           = @(0);
+    rotate.toValue             = @(M_PI);
+    rotate.duration = Duration;
+    rotate.repeatCount         = 1;
+    rotate.removedOnCompletion = NO;
+    [fromView.layer addAnimation:rotate forKey:rotate.keyPath];
+    
+    [UIView animateWithDuration:Duration animations:^{
+        fromView.alpha = 0.0;
+        toView.alpha = 1.0;
+        navigationBar.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        finish();
+        [self animationFinish:fromView toView:toView];
+    }];
+};
+    return Flip;
 }
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *fromView,UIView *toView,UIViewController *toController){

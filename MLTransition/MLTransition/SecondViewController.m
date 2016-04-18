@@ -22,7 +22,9 @@
     [self setUp];
     
 }
-
+- (BOOL)hidesBottomBarWhenPushed {
+    return  YES;
+}
 - (void)setUp {
 
     UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Home"]];
@@ -41,11 +43,11 @@
     tap.numberOfTapsRequired = 1;
     
     [self.view addGestureRecognizer:tap];
-    
    
 }
 
 - (void)closeCurrentView {
-    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeZoom completion:nil];
+//    [self popViewcontrollerAnimationType:UIViewAnimationTypeSlideOut];
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
 }
 @end

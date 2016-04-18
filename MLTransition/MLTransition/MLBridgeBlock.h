@@ -14,7 +14,8 @@ typedef NS_OPTIONS(NSInteger, UIViewAnimationType) {
     UIViewAnimationTypeZoom     = 1 << 1,// 放大
     UIViewAnimationTypeScale    = 1 << 2,// 缩小
     UIViewAnimationTypeFall     = 1 << 3,// 落下
-    UIViewAnimationTypeSlideOut = 1 << 4// 滑出
+    UIViewAnimationTypeSlideOut = 1 << 4,// 滑出
+    UIViewAnimationTypeFlip     = 1 << 5// 翻转
 };
 typedef NS_ENUM(NSInteger, UIViewControllerJumpType) {
     UIViewControllerJumpTypePush,

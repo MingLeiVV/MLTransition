@@ -50,17 +50,14 @@
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
         [containerView addSubview:toView];
-        [self showTabBar:toVc];
     animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^{
         [transitionContext completeTransition:YES];
     }];
-        animationBlock(fromView,toView,toVc.navigationController.navigationBar);
+    animationBlock(fromView,toView,toVc);
 }
 - (void)showTabBar:(UIViewController *)showVc
 {
     CGRect tabBarF = showVc.tabBarController.tabBar.frame;
-    CGRect navigationBarF = showVc.navigationController.navigationBar.frame;
     showVc.tabBarController.tabBar.frame = CGRectMake(0, tabBarF.origin.y, tabBarF.size.width, tabBarF.size.height);
-    showVc.navigationController.navigationBar.frame = CGRectMake(0, navigationBarF.origin.y, navigationBarF.size.width, navigationBarF.size.height);
 }
 @end
