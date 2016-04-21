@@ -36,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="login" width="640" height="1136"/>
+        <image name="login" width="490" height="871"/>
     </resources>
 </document>

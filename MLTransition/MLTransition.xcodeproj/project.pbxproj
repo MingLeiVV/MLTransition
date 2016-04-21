@@ -23,6 +23,7 @@
 		AB7D94941CB7AA2C001A7947 /* MLCustomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7D94931CB7AA2C001A7947 /* MLCustomTransition.m */; };
 		AB7D94971CB7B3AA001A7947 /* UIViewController+CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7D94961CB7B3AA001A7947 /* UIViewController+CustomSegue.m */; };
 		ABAB9A5A1CB67425004A36CE /* MLBridgeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAB9A591CB67425004A36CE /* MLBridgeBlock.m */; };
+		ABCCC92B1CC60B50000DB4BE /* MLPercentInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCC92A1CC60B50000DB4BE /* MLPercentInteractiveTransition.m */; };
 		ABFD27711CA2A81F002E5334 /* MLTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFD27701CA2A81F002E5334 /* MLTransitionAnimation.m */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		AB7D94961CB7B3AA001A7947 /* UIViewController+CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CustomSegue.m"; sourceTree = "<group>"; };
 		ABAB9A581CB67425004A36CE /* MLBridgeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLBridgeBlock.h; sourceTree = "<group>"; };
 		ABAB9A591CB67425004A36CE /* MLBridgeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLBridgeBlock.m; sourceTree = "<group>"; };
+		ABCCC9291CC60B50000DB4BE /* MLPercentInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPercentInteractiveTransition.h; sourceTree = "<group>"; };
+		ABCCC92A1CC60B50000DB4BE /* MLPercentInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPercentInteractiveTransition.m; sourceTree = "<group>"; };
 		ABFD276F1CA2A81F002E5334 /* MLTransitionAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransitionAnimation.h; sourceTree = "<group>"; };
 		ABFD27701CA2A81F002E5334 /* MLTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTransitionAnimation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +194,8 @@
 				ABAB9A591CB67425004A36CE /* MLBridgeBlock.m */,
 				AB7D94921CB7AA2C001A7947 /* MLCustomTransition.h */,
 				AB7D94931CB7AA2C001A7947 /* MLCustomTransition.m */,
+				ABCCC9291CC60B50000DB4BE /* MLPercentInteractiveTransition.h */,
+				ABCCC92A1CC60B50000DB4BE /* MLPercentInteractiveTransition.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABCCC92B1CC60B50000DB4BE /* MLPercentInteractiveTransition.m in Sources */,
 				AB04573A1BF1E941006C69A5 /* SecondViewController.m in Sources */,
 				AB0457371BF1D664006C69A5 /* MLSphere.m in Sources */,
 				AB7D94941CB7AA2C001A7947 /* MLCustomTransition.m in Sources */,

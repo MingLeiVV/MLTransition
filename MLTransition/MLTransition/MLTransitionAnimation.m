@@ -39,7 +39,7 @@
     UIView *fromView = nil;
     UIView *toView = nil;
     UIViewController *toVc =[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIViewController *formVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     if (isIOS8) {
         
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
@@ -53,11 +53,7 @@
     animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^{
         [transitionContext completeTransition:YES];
     }];
-    animationBlock(fromView,toView,toVc);
+    animationBlock(containerView,fromView,toView,toVc);
 }
-- (void)showTabBar:(UIViewController *)showVc
-{
-    CGRect tabBarF = showVc.tabBarController.tabBar.frame;
-    showVc.tabBarController.tabBar.frame = CGRectMake(0, tabBarF.origin.y, tabBarF.size.width, tabBarF.size.height);
-}
+
 @end

@@ -8,22 +8,24 @@
 
 #import "UIViewController+MLSegue.h"
 #import "MLSubmit.h"
+#import "MLPercentInteractiveTransition.h"
 #import <objc/runtime.h>
 
 @interface UIViewController ()
 @property(nonatomic ,copy) void(^block)();
 @property(nonatomic, assign)UIViewAnimationType animationType;
+@property(nonatomic, strong)MLPercentInteractiveTransition *percentInteractive;
 @end
-
 static const char *blockKey = "blockKey";
 static const char *animationTypeKey = "animationTypeKey";
-
+static const char *percentInteractiveKey = "percentInteractiveKey";
+static const char *directionKey = "directionKey";
 @implementation UIViewController (MLSegue)
-
-
+#pragma mark - publicMethod
 - (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion{
     viewController.transitioningDelegate = self;
     self.animationType = animationType;
+    NSLog(@"%@",self.direction);
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
@@ -43,6 +45,16 @@ static const char *animationTypeKey = "animationTypeKey";
     self.animationType = animationType;
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - privateMethod
+- (void)transitionSetting:(UIViewController *)toController {
+    if (self.animationType == UIViewAnimationTypeFlip) {
+        self.percentInteractive = [MLPercentInteractiveTransition new];
+        [self.percentInteractive addPopGesture:toController];
+    }
+}
+
+#pragma mark - delegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
     source.transitioningDelegate = nil;
@@ -83,5 +95,17 @@ static const char *animationTypeKey = "animationTypeKey";
    return objc_getAssociatedObject(self, blockKey);
 }
 
+- (void)setPercentInteractive:(MLPercentInteractiveTransition *)percentInteractive {
+    objc_setAssociatedObject(self, percentInteractiveKey, percentInteractive, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (MLPercentInteractiveTransition *)percentInteractive {
+    return objc_getAssociatedObject(self, percentInteractiveKey);
+}
+- (void)setDirection:(NSString *)direction {
+    objc_setAssociatedObject(self, directionKey, direction, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+- (NSString *)direction {
+    return objc_getAssociatedObject(self, directionKey);
+}
 @end
 

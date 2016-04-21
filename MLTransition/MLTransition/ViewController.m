@@ -10,10 +10,12 @@
 #import "MLSubmit.h"
 #import "SecondViewController.h"
 #import "MLTransition.h"
+#import "MLPercentInteractiveTransition.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
-@interface ViewController ()
+@interface ViewController ()<UIViewControllerAnimatedTransitioning>
 @property(nonatomic ,strong)MLSubmit *submit;
+@property(nonatomic, strong)MLPercentInteractiveTransition *percent;
 @end
 
 @implementation ViewController
@@ -29,11 +31,11 @@
     
     UIImage *image = [UIImage imageNamed:@"button"];
     
-    UIButton *submit = [[UIButton alloc]initWithFrame:CGRectMake(20, UISCREEN.height - 100, UISCREEN.width - 20 * 2, 40)];
+    UIButton *submit = [[UIButton alloc]initWithFrame:CGRectMake(20, UISCREEN.height - 200, UISCREEN.width - 20 * 2, 60)];
     
     self.submit = submit;
 //    submit.backgroundColor = [UIColor colorWithRed:1 green:0.f/255.0f blue:128.0f/255.0f alpha:1];
-    [submit setBackgroundImage:[UIImage imageNamed:@"button"] forState:UIControlStateNormal];
+//    [submit setBackgroundImage:[UIImage imageNamed:@"button"] forState:UIControlStateNormal];
     
 //    [submit setTitle:@"login" forState:UIControlStateNormal];
     
@@ -43,9 +45,12 @@
 }
 
 - (void)login {
-    
-//    [self presentViewController:[[SecondViewController alloc]init] loadingDuration:2 transitionDuration:0.4 formViewAlpha:0.0 toViewAlpha:0.5 completion:nil];
-    [self presentViewcontroller:[[SecondViewController alloc]init] animationType:UIViewAnimationTypeFlip completion:nil];
+  SecondViewController *toController =  [[SecondViewController alloc]init];
+//    self.percent = [[MLPercentInteractiveTransition alloc]init                               ];
+//    [self.percent addPopGesture:toController];
+//    [self presentViewController:toController animated:YES completion:nil];
+    [self presentViewcontroller:toController animationType:UIViewAnimationTypeCubeFlip completion:nil];
+//    [self presentViewController:toController animated:YES completion:nil];
 //    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeFall];
     
 }

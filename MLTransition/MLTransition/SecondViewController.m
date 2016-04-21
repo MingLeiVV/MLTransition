@@ -8,7 +8,6 @@
 
 #import "SecondViewController.h"
 #import "UIViewController+MLSegue.h"
-
 @interface SecondViewController ()
 @property(nonatomic ,strong)UIImageView *imageView;
 @end
@@ -43,11 +42,11 @@
     tap.numberOfTapsRequired = 1;
     
     [self.view addGestureRecognizer:tap];
-   
-}
 
+}
 - (void)closeCurrentView {
 //    [self popViewcontrollerAnimationType:UIViewAnimationTypeSlideOut];
-    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
+//    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeCubeFlip completion:nil];
 }
 @end
