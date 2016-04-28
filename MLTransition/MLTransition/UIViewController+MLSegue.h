@@ -14,9 +14,11 @@ typedef void(^Completion)();
 @property(nonatomic, copy)NSString *direction;
 
 - (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion;
+
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion;
 
 - (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType;
+
 - (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType;
 
 

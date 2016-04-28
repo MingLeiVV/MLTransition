@@ -189,28 +189,31 @@ UIViewControllerJumpType _jumpType; // 跳转类型
 + (animationType)FlipPage:(completion)finish {
 animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
     
-    [containerView sendSubviewToBack:toView];
-    fromView.alpha = 1.0;
-    toView.alpha = 0.5;
-    // 设置所有子layer点
+    toView.alpha = 0.2;
+    //增加透视的transform
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = -0.002;
     containerView.layer.sublayerTransform = transform;
-    // 初始化frame
+    
+    //给fromVC和toVC分别设置相同的起始frame
     CGRect initialFrame = toController.view.frame;
     fromView.frame = initialFrame;
     toView.frame = initialFrame;
-    // 对layer设置anchor point 并获得对应transfrom属性
-    CATransform3D transfromRotate = [self flipPageSetting:fromView];
     
+    CATransform3D transfromRotate = [self flipPageSetting:([self checkJumpMode] ? fromView : toView)];
     [UIView animateWithDuration:Duration - 1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         //旋转fromView 90度
-        fromView.alpha = 0.0;
         toView.alpha = 1.0;
-        fromView.layer.transform = transfromRotate;
+        if ([self checkJumpMode]) {
+            fromView.layer.transform = transfromRotate;
+        }else {
+            toView.layer.transform = transfromRotate;
+        }
     } completion:^(BOOL finished) {
         [self updateAnchorPointAndOffset:CGPointMake(0.5, 0.5) view:fromView];
+        [self updateAnchorPointAndOffset:CGPointMake(0.5, 0.5) view:toView];
         fromView.layer.transform = CATransform3DIdentity;
+        toView.layer.transform = CATransform3DIdentity;
         finish();
         [self animationFinish:fromView toView:toView];
         
@@ -222,14 +225,28 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 + (animationType)Flip:(completion)finish {
     animationType Flip = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
         
-        [containerView sendSubviewToBack:toView];
-        fromView.alpha = 1.0;
-        toView.alpha = 0.5;
+        if ([self checkJumpMode]) {
+            toView.alpha = 0.0;
+            [fromView addSubview:toView];
+        }else {
+            fromView.alpha = 1.0;
+            [containerView addSubview:toView];
+        }
+        CATransition *transition = [CATransition animation];
+        transition.type = @"oglFlip";
+        transition.subtype = kCATransitionFromRight;
+        transition.duration = Duration;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            //旋转fromView 90度
-            fromView.alpha = 0.0;
+            if ([self checkJumpMode]) {
             toView.alpha = 1.0;
+            [fromView.layer addAnimation:transition forKey:nil];
+            }else {
+            fromView.alpha = 0.0;
+            [containerView.layer addAnimation:transition forKey:nil];
+            }
+
         } completion:^(BOOL finished) {
+            [containerView addSubview:toView];
             finish();
             [self animationFinish:fromView toView:toView];
             
@@ -309,23 +326,34 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+        finish();
     };
     return none;
 }
-+ (CATransform3D)flipPageSetting:(UIView *)fromView {
+// 检查跳转方式是否是push或者present
++ (BOOL)checkJumpMode {
     if (_jumpType == UIViewControllerJumpTypePresent || _jumpType == UIViewControllerJumpTypePush) {
+        return YES;
+    }
+    return NO;
+}
+// 翻页动画一些设置
++ (CATransform3D)flipPageSetting:(UIView *)fromView {
+    if ([self checkJumpMode]) {
         [self updateAnchorPointAndOffset:CGPointMake(0, 0.5) view:fromView];
         return CATransform3DMakeRotation(-M_PI_2, 0, 1, 0);
-    }else {
-        [self updateAnchorPointAndOffset:CGPointMake(1.0, 0.5) view:fromView];
     }
-        return CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
+        fromView.layer.transform = CATransform3DMakeRotation(-M_PI_2, 0.0, 1.0, 0.0);
+        [self updateAnchorPointAndOffset:CGPointMake(0.0, 0.5) view:fromView];
+        return CATransform3DMakeRotation(0, 0, 1, 0);
 }
+// 动画完成后操作
 + (void)animationFinish:(UIView *)fromView toView:(UIView *)toView {
     [fromView removeFromSuperview];
     [toView.layer removeAllAnimations];
     [fromView removeFromSuperview];
 }
+// 改变layer锚点
 + (void)updateAnchorPointAndOffset:(CGPoint)anchorPoint view:(UIView *)view{
     view.layer.anchorPoint = anchorPoint;
     view.layer.position    = CGPointMake([UIScreen mainScreen].bounds.size.width * anchorPoint.x, [UIScreen mainScreen].bounds.size.height * anchorPoint.y);

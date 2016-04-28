@@ -47,6 +47,6 @@
 - (void)closeCurrentView {
 //    [self popViewcontrollerAnimationType:UIViewAnimationTypeSlideOut];
 //    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
-    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeCubeFlip completion:nil];
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeFlip completion:nil];
 }
 @end

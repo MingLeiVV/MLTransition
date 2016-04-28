@@ -25,7 +25,6 @@ static const char *directionKey = "directionKey";
 - (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion{
     viewController.transitioningDelegate = self;
     self.animationType = animationType;
-    NSLog(@"%@",self.direction);
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
