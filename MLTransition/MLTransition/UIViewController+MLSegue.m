@@ -11,6 +11,11 @@
 #import "MLPercentInteractiveTransition.h"
 #import <objc/runtime.h>
 
+NSString *const kMLTransitionFromRight = @"kMLTransitionFromRight";
+NSString *const kMLTransitionFromLeft = @"kMLTransitionFromLeft";
+NSString *const kMLTransitionFromTop = @"kMLTransitionFromTop";
+NSString *const kMLTransitionFromBottom = @"kMLTransitionFromBottom";
+
 @interface UIViewController ()
 @property(nonatomic ,copy) void(^block)();
 @property(nonatomic, assign)UIViewAnimationType animationType;

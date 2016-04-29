@@ -47,6 +47,7 @@
 - (void)closeCurrentView {
 //    [self popViewcontrollerAnimationType:UIViewAnimationTypeSlideOut];
 //    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
-    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeFlip completion:nil];
+    self.direction = kMLTransitionFromLeft;
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeRipple completion:nil];
 }
 @end

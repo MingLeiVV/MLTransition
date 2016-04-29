@@ -53,7 +53,7 @@
     animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^{
         [transitionContext completeTransition:YES];
     }];
-    animationBlock(containerView,fromView,toView,toVc);
+    animationBlock(containerView,fromView,toView,toVc,fromVc);
 }
 
 @end

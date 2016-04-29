@@ -49,7 +49,8 @@
 //    self.percent = [[MLPercentInteractiveTransition alloc]init                               ];
 //    [self.percent addPopGesture:toController];
 //    [self presentViewController:toController animated:YES completion:nil];
-    [self presentViewcontroller:toController animationType:UIViewAnimationTypeFlip completion:nil];
+    self.direction = kMLTransitionFromTop;
+    [self presentViewcontroller:toController animationType:UIViewAnimationTypeRipple completion:nil];
 //    [self presentViewController:toController animated:YES completion:nil];
 //    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeFall];
     

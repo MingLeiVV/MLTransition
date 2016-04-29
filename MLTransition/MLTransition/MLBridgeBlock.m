@@ -8,6 +8,7 @@
 
 #import "MLBridgeBlock.h"
 #import "UIView+Position.h"
+#import "UIViewController+MLSegue.h"
 #define navigationBar toController.navigationController.navigationBar
 #define Duration 2
 #define UIScreen_Width [UIScreen mainScreen].bounds.size.width
@@ -61,7 +62,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
 }
 + (animationType)Gradient:(completion)finish{
     
-    animationType gradient = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType gradient = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         fromView.alpha = 1.0;
         toView.alpha = 0.0;
         navigationBar.alpha = 0.0;
@@ -78,7 +79,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
     return gradient;
 }
 + (animationType)Zoom:(completion)finish {
-    animationType zoom = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType zoom = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         fromView.alpha = 0.5;
         toView.alpha = 0.5;
@@ -104,7 +105,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
     return zoom;
 }
 + (animationType)Scale:(completion)finish {
-    animationType scale =  ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType scale =  ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
             [self transitionSeting:toController];
         CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         fromView.alpha = 1.0;
@@ -131,7 +132,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
     return scale;
 }
 + (animationType)Fall:(completion)finish {
-    animationType fall = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType fall = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
             [self transitionSeting:toController];
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
@@ -158,7 +159,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
     return fall;
 }
 + (animationType)SlideOut:(completion)finish {
-    animationType slideOut = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType slideOut = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         [self transitionSeting:toController];
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
         fromView.alpha = 1.0;
@@ -187,7 +188,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
 }
 
 + (animationType)FlipPage:(completion)finish {
-animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
     
     toView.alpha = 0.2;
     //增加透视的transform
@@ -223,7 +224,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 }
 
 + (animationType)Flip:(completion)finish {
-    animationType Flip = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType Flip = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         
         if ([self checkJumpMode]) {
             toView.alpha = 0.0;
@@ -234,7 +235,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         }
         CATransition *transition = [CATransition animation];
         transition.type = @"oglFlip";
-        transition.subtype = kCATransitionFromRight;
+        transition.subtype = [self getTransitionDirection:fromController];
         transition.duration = Duration;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             if ([self checkJumpMode]) {
@@ -256,16 +257,13 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 }
 
 + (animationType)CubeFlip:(completion)finish {
-    animationType CubeFlip = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType CubeFlip = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         [fromView addSubview:toView];
         CATransition *transition = [CATransition animation];
         fromView.alpha = 1.0;
         toView.alpha = 0.5;
         transition.type = @"cube";
-        transition.subtype = kCATransitionFromRight;
-        if (_jumpType == UIViewControllerJumpTypeDismiss || _jumpType == UIViewControllerJumpTypePop) {
-             transition.subtype = kCATransitionFromLeft;
-        }
+        transition.subtype = [self getTransitionDirection:fromController];
         transition.duration = Duration;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
             [fromView.layer addAnimation:transition forKey:nil];
@@ -287,16 +285,17 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 }
 
 + (animationType)Ripple:(completion)finish {
-    animationType Ripple = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
-        
-        [containerView sendSubviewToBack:toView];
-        fromView.alpha = 1.0;
-        toView.alpha = 0.5;
+    animationType Ripple = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
+        [fromView addSubview:toView];
+        CATransition *transition = [CATransition animation];
+        toView.alpha = 0.0;
+        transition.type = @"rippleEffect";
+        transition.duration = Duration;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            //旋转fromView 90度
-            fromView.alpha = 0.0;
             toView.alpha = 1.0;
+            [fromView.layer addAnimation:transition forKey:nil];
         } completion:^(BOOL finished) {
+            [containerView addSubview:toView];
             finish();
             [self animationFinish:fromView toView:toView];
             
@@ -306,16 +305,18 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 }
 
 + (animationType)Stack:(completion)finish {
-    animationType Stack = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
-        
-        [containerView sendSubviewToBack:toView];
-        fromView.alpha = 1.0;
-        toView.alpha = 0.5;
+    animationType Stack = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
+        [fromView addSubview:toView];
+        CATransition *transition = [CATransition animation];
+        toView.alpha = 0.0;
+        transition.type = @"reveal";
+        transition.subtype = [self getTransitionDirection:fromController];
+        transition.duration = Duration;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            //旋转fromView 90度
-            fromView.alpha = 0.0;
             toView.alpha = 1.0;
+            [fromView.layer addAnimation:transition forKey:nil];
         } completion:^(BOOL finished) {
+            [containerView addSubview:toView];
             finish();
             [self animationFinish:fromView toView:toView];
             
@@ -325,10 +326,21 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 }
 
 + (animationType)None:(completion)finish {
-    animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController){
+    animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         finish();
     };
     return none;
+}
+
++ (NSString *const)getTransitionDirection:(UIViewController *)controller {
+    if ([controller.direction isEqualToString:kMLTransitionFromTop]) {
+        return kCATransitionFromTop;
+    }else if ([controller.direction isEqualToString:kMLTransitionFromBottom]) {
+    return kCATransitionFromBottom;
+    }else if ([controller.direction isEqualToString:kMLTransitionFromLeft]) {
+        return kCATransitionFromLeft;
+    }
+    return kCATransitionFromRight;
 }
 // 检查跳转方式是否是push或者present
 + (BOOL)checkJumpMode {
