@@ -16,12 +16,14 @@ NSString *const kMLTransitionFromLeft = @"kMLTransitionFromLeft";
 NSString *const kMLTransitionFromTop = @"kMLTransitionFromTop";
 NSString *const kMLTransitionFromBottom = @"kMLTransitionFromBottom";
 
-@interface UIViewController ()
+@interface UIViewController ()<UIViewControllerTransitioningDelegate,UINavigationControllerDelegate>
 @property(nonatomic ,copy) void(^block)();
+@property(nonatomic ,copy) void(^animation)(UIView *containerView,UIView *fromView,UIView *toView,Completion completion);
 @property(nonatomic, assign)UIViewAnimationType animationType;
 @property(nonatomic, strong)MLPercentInteractiveTransition *percentInteractive;
 @end
 static const char *blockKey = "blockKey";
+static const char *animationKey = "animationKey";
 static const char *animationTypeKey = "animationTypeKey";
 static const char *percentInteractiveKey = "percentInteractiveKey";
 static const char *directionKey = "directionKey";
@@ -49,7 +51,29 @@ static const char *directionKey = "directionKey";
     self.animationType = animationType;
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+// Custom Animation
+- (void)presentViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
+    viewController.transitioningDelegate = self;
+    self.animation = animations;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+- (void)dismissViewcontrollerAnimations:(animationBlock)animations {
+    self.transitioningDelegate = self;
+    self.animation = animations;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)pushViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
+    __weak typeof(self) weakSelf = self;
+    weakSelf.navigationController.delegate = self;
+    self.animation = animations;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+- (void)popViewcontrollerAnimations:(animationBlock)animations {
+    __weak typeof(self) weakSelf = self;
+    weakSelf.navigationController.delegate = self;
+    self.animation = animations;
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - privateMethod
 - (void)transitionSetting:(UIViewController *)toController {
     if (self.animationType == UIViewAnimationTypeFlip) {
@@ -60,25 +84,33 @@ static const char *directionKey = "directionKey";
 
 #pragma mark - delegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-
     source.transitioningDelegate = nil;
-    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePresent];
+    if (self.animationType) {
+         return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePresent];
+    }
+    return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     dismissed.transitioningDelegate = nil;
-    return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypeDismiss];
+    if (self.animationType) {
+         return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypeDismiss];
+    }
+    return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     self.navigationController.delegate = nil;
-    if (operation == UINavigationControllerOperationPush) {
-        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePush];
-    } else if (operation == UINavigationControllerOperationPop) {
-        return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePop];
+    if (self.animationType) {
+        if (operation == UINavigationControllerOperationPush) {
+            return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePush];
+        } else if (operation == UINavigationControllerOperationPop) {
+            return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePop];
+        }
     }
-    return nil;
+
+    return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
 
 #pragma mark - Synthesis
@@ -97,6 +129,15 @@ static const char *directionKey = "directionKey";
 - (void (^)())block {
 
    return objc_getAssociatedObject(self, blockKey);
+}
+
+- (void)setAnimation:(void (^)(UIView *, UIView *, UIView *, Completion))animation {
+    objc_setAssociatedObject(self, animationKey, animation, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void (^)(UIView *, UIView *, UIView *, Completion))animation {
+    
+    return objc_getAssociatedObject(self, animationKey);
 }
 
 - (void)setPercentInteractive:(MLPercentInteractiveTransition *)percentInteractive {

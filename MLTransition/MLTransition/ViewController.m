@@ -11,7 +11,6 @@
 #import "SecondViewController.h"
 #import "MLTransition.h"
 #import "MLPercentInteractiveTransition.h"
-#import "UIViewController+CustomSegue.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
 @interface ViewController ()
@@ -51,31 +50,32 @@
 //    [self.percent addPopGesture:toController];
 //    [self presentViewController:toController animated:YES completion:nil];
 //    self.direction = kMLTransitionFromTop;
-    [self presentViewcontroller:self.secondViewController animationType:UIViewAnimationTypeRipple completion:nil];
-//    [self presentViewcontroller:self.secondViewController animations:^(UIView *containerView, UIView *fromView, UIView *toView, Completion completion) {
-//        [fromView addSubview:toView];
-//        CATransition *transition = [CATransition animation];
-//        fromView.alpha = 1.0;
-//        toView.alpha = 0.5;
-//        transition.type = @"cube";
-//        transition.duration = 2.0;
-//        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
-//            [fromView.layer addAnimation:transition forKey:nil];
-//            fromView.alpha = 0.7;
-//            toView.alpha = 1.0;
-//        } completion:^(BOOL finished) {
-//            [UIView animateWithDuration:0.5 animations:^{
-//                fromView.alpha = 1.0;
-//            } completion:^(BOOL finished) {
-//                [containerView addSubview:toView];
-//                completion();
-//            }];
-//            
-//        }];
-//    }];
+//    [self presentViewcontroller:self.secondViewController animationType:UIViewAnimationTypeRipple completion:nil];
+    [self presentViewcontroller:self.secondViewController animations:^(UIView *containerView, UIView *fromView, UIView *toView, Completion completion) {
+        [fromView addSubview:toView];
+        CATransition *transition = [CATransition animation];
+        fromView.alpha = 1.0;
+        toView.alpha = 0.5;
+        transition.type = @"cube";
+        transition.duration = 2.0;
+        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+            [fromView.layer addAnimation:transition forKey:nil];
+            fromView.alpha = 0.7;
+            toView.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5 animations:^{
+                fromView.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                [containerView addSubview:toView];
+                completion();
+            }];
+            
+        }];
+    }];
 //    [self presentViewController:toController animated:YES completion:nil];
 //    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeFall];
 }
+
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
         _secondViewController = [[SecondViewController alloc]init];

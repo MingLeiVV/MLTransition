@@ -23,8 +23,7 @@
 		ABD40EE81CD3382C00C4ECDE /* MLSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDA1CD3382C00C4ECDE /* MLSphere.m */; };
 		ABD40EE91CD3382C00C4ECDE /* MLSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDC1CD3382C00C4ECDE /* MLSubmit.m */; };
 		ABD40EEA1CD3382C00C4ECDE /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDE1CD3382C00C4ECDE /* UIView+Position.m */; };
-		ABD40EEB1CD3382C00C4ECDE /* UIViewController+CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EE11CD3382C00C4ECDE /* UIViewController+CustomSegue.m */; };
-		ABD40EEC1CD3382C00C4ECDE /* UIViewController+MLSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EE31CD3382C00C4ECDE /* UIViewController+MLSegue.m */; };
+		ABD40EF21CD3621400C4ECDE /* UIViewController+MLSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EF11CD3621400C4ECDE /* UIViewController+MLSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,10 +77,8 @@
 		ABD40EDD1CD3382C00C4ECDE /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
 		ABD40EDE1CD3382C00C4ECDE /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
 		ABD40EDF1CD3382C00C4ECDE /* MLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransition.h; sourceTree = "<group>"; };
-		ABD40EE01CD3382C00C4ECDE /* UIViewController+CustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CustomSegue.h"; sourceTree = "<group>"; };
-		ABD40EE11CD3382C00C4ECDE /* UIViewController+CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CustomSegue.m"; sourceTree = "<group>"; };
-		ABD40EE21CD3382C00C4ECDE /* UIViewController+MLSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MLSegue.h"; sourceTree = "<group>"; };
-		ABD40EE31CD3382C00C4ECDE /* UIViewController+MLSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MLSegue.m"; sourceTree = "<group>"; };
+		ABD40EF01CD3621400C4ECDE /* UIViewController+MLSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MLSegue.h"; sourceTree = "<group>"; };
+		ABD40EF11CD3621400C4ECDE /* UIViewController+MLSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MLSegue.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,10 +177,8 @@
 				ABD40ECF1CD3382C00C4ECDE /* CoreComponent */,
 				ABD40ED61CD3382C00C4ECDE /* Helper */,
 				ABD40EDF1CD3382C00C4ECDE /* MLTransition.h */,
-				ABD40EE01CD3382C00C4ECDE /* UIViewController+CustomSegue.h */,
-				ABD40EE11CD3382C00C4ECDE /* UIViewController+CustomSegue.m */,
-				ABD40EE21CD3382C00C4ECDE /* UIViewController+MLSegue.h */,
-				ABD40EE31CD3382C00C4ECDE /* UIViewController+MLSegue.m */,
+				ABD40EF01CD3621400C4ECDE /* UIViewController+MLSegue.h */,
+				ABD40EF11CD3621400C4ECDE /* UIViewController+MLSegue.m */,
 			);
 			path = MLTransition;
 			sourceTree = "<group>";
@@ -354,13 +349,12 @@
 				ABD40EE61CD3382C00C4ECDE /* MLTransitionAnimation.m in Sources */,
 				ABD40EE81CD3382C00C4ECDE /* MLSphere.m in Sources */,
 				AB04573A1BF1E941006C69A5 /* SecondViewController.m in Sources */,
-				ABD40EEB1CD3382C00C4ECDE /* UIViewController+CustomSegue.m in Sources */,
 				AB1B96441BF18C7B00966746 /* ViewController.m in Sources */,
 				ABD40EE51CD3382C00C4ECDE /* MLCustomTransition.m in Sources */,
 				ABD40EE71CD3382C00C4ECDE /* MLPercentInteractiveTransition.m in Sources */,
 				AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */,
 				ABD40EE41CD3382C00C4ECDE /* MLBridgeBlock.m in Sources */,
-				ABD40EEC1CD3382C00C4ECDE /* UIViewController+MLSegue.m in Sources */,
+				ABD40EF21CD3621400C4ECDE /* UIViewController+MLSegue.m in Sources */,
 				AB1B963E1BF18C7B00966746 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
