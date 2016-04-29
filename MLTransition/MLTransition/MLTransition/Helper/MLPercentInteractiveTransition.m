@@ -35,7 +35,7 @@
             //            [presentedVC dismissViewControllerAnimated:YES completion:nil];
             //            如果是navigationController控制，这里应该是
 //            [presentedVC.navigationController popViewControllerAnimated:YES];
-            [presentedVC dismissViewcontrollerAnimationType:UIViewAnimationTypeFlip completion:nil];
+//            [presentedVC dismissViewcontrollerAnimationType:UIViewAnimationTypeFlip completion:nil];
             break;
         }
         case UIGestureRecognizerStateChanged:{
