@@ -327,7 +327,9 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
+        toView.alpha = 1.0;
         finish();
+        [self animationFinish:fromView toView:toView];
     };
     return none;
 }

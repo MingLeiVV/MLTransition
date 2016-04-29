@@ -48,6 +48,28 @@
 //    [self popViewcontrollerAnimationType:UIViewAnimationTypeSlideOut];
 //    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeGradient completion:nil];
 //    self.direction = kMLTransitionFromLeft;
-//    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeRipple completion:nil];
+    [self dismissViewcontrollerAnimationType:UIViewAnimationTypeNone completion:nil];
+//    [self dismissViewcontrollerAnimations:^(UIView *containerView, UIView *fromView, UIView *toView, Completion completion) {
+//        [fromView addSubview:toView];
+//                CATransition *transition = [CATransition animation];
+//                fromView.alpha = 1.0;
+//                toView.alpha = 0.5;
+//                transition.type = @"cube";
+//                transition.duration = 2.0;
+//                [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+//                    [fromView.layer addAnimation:transition forKey:nil];
+//                    fromView.alpha = 0.7;
+//                    toView.alpha = 1.0;
+//                } completion:^(BOOL finished) {
+//                    [UIView animateWithDuration:0.5 animations:^{
+//                        fromView.alpha = 1.0;
+//                    } completion:^(BOOL finished) {
+//                        [containerView addSubview:toView];
+//                        completion();
+//                    }];
+//                    
+//                }];
+//
+//    }];
 }
 @end
