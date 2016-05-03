@@ -10,7 +10,7 @@
 #import "UIView+Position.h"
 #import "UIViewController+MLSegue.h"
 #define navigationBar toController.navigationController.navigationBar
-#define Duration 2
+#define Duration 2 // 动画时长
 #define UIScreen_Width [UIScreen mainScreen].bounds.size.width
 #define UIScreen_Height [UIScreen mainScreen].bounds.size.height
 #define movePosition 300
@@ -333,7 +333,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
     };
     return none;
 }
-
+// 获取动画的方向
 + (NSString *const)getTransitionDirection:(UIViewController *)controller {
     if ([controller.direction isEqualToString:kMLTransitionFromTop]) {
         return kCATransitionFromTop;
