@@ -50,6 +50,9 @@ UIViewControllerJumpType _jumpType; // 跳转类型
         case UIViewAnimationTypeStack:
             return [self Stack:finish];
             break;
+            case UIViewAnimationTypeBlinds:
+            return [self Blinds:finish];
+            break;
             
     }
     return [self None:finish];
@@ -324,7 +327,27 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
     };
     return Stack;
 }
-
++ (animationType)Blinds:(completion)finish {
+    animationType Stack = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
+        toView.alpha = 0.5;
+        CATransform3D transformScale = [self checkJumpMode] ? [self blindsSetting:toView] : [self blindsSetting:fromView];
+        [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            if ([self checkJumpMode]) {
+                 toView.layer.transform = transformScale;
+            }else {
+                fromView.layer.transform = transformScale;
+            }
+            toView.alpha = 1;
+        } completion:^(BOOL finished) {
+            fromView.layer.transform = CATransform3DIdentity;
+            toView.layer.transform = CATransform3DIdentity;
+            finish();
+            [self animationFinish:fromView toView:toView];
+            
+        }];
+    };
+    return Stack;
+}
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         toView.alpha = 1.0;
@@ -361,11 +384,21 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         [self updateAnchorPointAndOffset:CGPointMake(0.0, 0.5) view:fromView];
         return CATransform3DMakeRotation(0, 0, 1, 0);
 }
+// 百叶窗动画设置
++ (CATransform3D)blindsSetting:(UIView *)fromView {
+    if ([self checkJumpMode]) {
+        fromView.layer.transform = CATransform3DMakeScale(1, 0.01, 1);
+        return CATransform3DMakeScale(1, 1, 1);
+    }
+    return CATransform3DMakeScale(1, 0.01, 1);
+}
 // 动画完成后操作
 + (void)animationFinish:(UIView *)fromView toView:(UIView *)toView {
+    fromView.alpha = 1.0;
+    toView.alpha = 1.0;
     [fromView removeFromSuperview];
     [toView.layer removeAllAnimations];
-    [fromView removeFromSuperview];
+    [fromView.layer removeAllAnimations];
 }
 // 改变layer锚点
 + (void)updateAnchorPointAndOffset:(CGPoint)anchorPoint view:(UIView *)view{

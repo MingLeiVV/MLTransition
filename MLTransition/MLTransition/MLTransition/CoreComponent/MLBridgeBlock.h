@@ -19,7 +19,8 @@ typedef NS_OPTIONS(NSInteger, UIViewAnimationType) {
     UIViewAnimationTypeFlip     = 1 << 7,// 翻转
     UIViewAnimationTypeCubeFlip = 1 << 8,// 立体翻转
     UIViewAnimationTypeStack    = 1 << 9,// 堆叠
-    UIViewAnimationTypeRipple   = 1 << 10// 水滴/涟波
+    UIViewAnimationTypeRipple   = 1 << 10,// 水滴/涟波
+    UIViewAnimationTypeBlinds   = 1 << 11// 百叶窗
     
 };
 typedef NS_ENUM(NSInteger, UIViewControllerJumpType) {

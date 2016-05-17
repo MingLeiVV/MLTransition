@@ -7,7 +7,6 @@
 //
 
 #import "UIViewController+MLSegue.h"
-#import "MLSubmit.h"
 #import "MLPercentInteractiveTransition.h"
 #import <objc/runtime.h>
 
@@ -112,7 +111,6 @@ static const char *directionKey = "directionKey";
 
     return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
-
 #pragma mark - Synthesis
 - (void)setAnimationType:(UIViewAnimationType)animationType {
     objc_setAssociatedObject(self, animationTypeKey, @(animationType), OBJC_ASSOCIATION_ASSIGN);

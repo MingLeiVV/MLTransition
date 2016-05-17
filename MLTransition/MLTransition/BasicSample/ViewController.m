@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "MLSubmit.h"
 #import "SecondViewController.h"
-#import "MLTransition.h"
 #import "MLPercentInteractiveTransition.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
@@ -17,17 +16,33 @@
 @property(nonatomic ,strong)MLSubmit *submit;
 @property(nonatomic, strong)MLPercentInteractiveTransition *percent;
 @property(nonatomic, strong)SecondViewController *secondViewController;
+@property(nonatomic, assign)UIViewAnimationType push;
+@property(nonatomic, assign)UIViewAnimationType pop;
 @end
 
 @implementation ViewController
 
++ (instancetype)viewControllerWithPushType:(UIViewAnimationType)pushType popType:(UIViewAnimationType)popType {
+    return [[self alloc]initWithPushType:pushType popType:popType];
+}
+- (instancetype)initWithPushType:(UIViewAnimationType)pushType popType:(UIViewAnimationType)popType {
+    if(self = [super init]) {
+        self.push = pushType;
+        self.pop = popType;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self initBackGroundImage];
     [self creatSubmit];
     
 }
-
+- (void)initBackGroundImage {
+    UIImageView *bgImgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:bgImgView];
+    bgImgView.image = [UIImage imageNamed:@"login"];
+}
 - (void)creatSubmit {
     
     UIImage *image = [UIImage imageNamed:@"button"];
@@ -48,37 +63,13 @@
 - (void)login {
 //    self.percent = [[MLPercentInteractiveTransition alloc]init                               ];
 //    [self.percent addPopGesture:toController];
-//    [self presentViewController:toController animated:YES completion:nil];
-//    self.direction = kMLTransitionFromTop;
-    [self presentViewcontroller:self.secondViewController animationType:4 completion:nil];
-//    [self presentViewcontroller:self.secondViewController animations:^(UIView *containerView, UIView *fromView, UIView *toView, Completion completion) {
-//        [fromView addSubview:toView];
-//        CATransition *transition = [CATransition animation];
-//        fromView.alpha = 1.0;
-//        toView.alpha = 0.5;
-//        transition.type = @"cube";
-//        transition.duration = 2.0;
-//        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
-//            [fromView.layer addAnimation:transition forKey:nil];
-//            fromView.alpha = 0.7;
-//            toView.alpha = 1.0;
-//        } completion:^(BOOL finished) {
-//            [UIView animateWithDuration:0.5 animations:^{
-//                fromView.alpha = 1.0;
-//            } completion:^(BOOL finished) {
-//                [containerView addSubview:toView];
-//                completion();
-//            }];
-//            
-//        }];
-//    }];
-//    [self presentViewController:toController animated:YES completion:nil];
-//    [self pushViewcontroller:[[SecondViewController alloc] init] animationType:UIViewAnimationTypeFall];
+//    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
+    [self pushViewcontroller:self.secondViewController animationType:_pop];
 }
 
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
-        _secondViewController = [[SecondViewController alloc]init];
+        _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePush Type:_pop];
     }
     return _secondViewController;
 }
