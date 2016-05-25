@@ -27,6 +27,8 @@
 		ABEC44001CEB009B00C40CC1 /* Basic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEC43FF1CEB009B00C40CC1 /* Basic.storyboard */; };
 		ABEC44031CEB00FB00C40CC1 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEC44021CEB00FB00C40CC1 /* MainTableViewController.m */; };
 		ABEC44061CEB012800C40CC1 /* BasicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEC44051CEB012800C40CC1 /* BasicTableViewController.m */; };
+		ABEC440B1CEB180F00C40CC1 /* Complex.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEC440A1CEB180F00C40CC1 /* Complex.storyboard */; };
+		ABEC440F1CEB189200C40CC1 /* ComplexTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEC440E1CEB189200C40CC1 /* ComplexTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,9 @@
 		ABEC44021CEB00FB00C40CC1 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		ABEC44041CEB012800C40CC1 /* BasicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewController.h; sourceTree = "<group>"; };
 		ABEC44051CEB012800C40CC1 /* BasicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableViewController.m; sourceTree = "<group>"; };
+		ABEC440A1CEB180F00C40CC1 /* Complex.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Complex.storyboard; path = ../BasicSample/Complex.storyboard; sourceTree = "<group>"; };
+		ABEC440D1CEB189200C40CC1 /* ComplexTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplexTableViewController.h; sourceTree = "<group>"; };
+		ABEC440E1CEB189200C40CC1 /* ComplexTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplexTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +142,7 @@
 		AB1B963B1BF18C7B00966746 /* MLTransition */ = {
 			isa = PBXGroup;
 			children = (
+				ABEC440C1CEB187F00C40CC1 /* ComplexSample */,
 				ABEC43F51CEB008C00C40CC1 /* BasicSample */,
 				ABD40ECE1CD3382C00C4ECDE /* MLTransition */,
 				AB1B963C1BF18C7B00966746 /* Supporting Files */,
@@ -230,6 +236,16 @@
 				ABEC43FF1CEB009B00C40CC1 /* Basic.storyboard */,
 			);
 			path = BasicSample;
+			sourceTree = "<group>";
+		};
+		ABEC440C1CEB187F00C40CC1 /* ComplexSample */ = {
+			isa = PBXGroup;
+			children = (
+				ABEC440A1CEB180F00C40CC1 /* Complex.storyboard */,
+				ABEC440D1CEB189200C40CC1 /* ComplexTableViewController.h */,
+				ABEC440E1CEB189200C40CC1 /* ComplexTableViewController.m */,
+			);
+			path = ComplexSample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +356,7 @@
 			files = (
 				AB1B964C1BF18C7B00966746 /* LaunchScreen.storyboard in Resources */,
 				ABEC44001CEB009B00C40CC1 /* Basic.storyboard in Resources */,
+				ABEC440B1CEB180F00C40CC1 /* Complex.storyboard in Resources */,
 				AB1B96491BF18C7B00966746 /* Assets.xcassets in Resources */,
 				AB1B96771BF18E3800966746 /* Main.storyboard in Resources */,
 			);
@@ -375,6 +392,7 @@
 				ABD40EE81CD3382C00C4ECDE /* MLSphere.m in Sources */,
 				ABD40EE51CD3382C00C4ECDE /* MLCustomTransition.m in Sources */,
 				ABD40EE71CD3382C00C4ECDE /* MLPercentInteractiveTransition.m in Sources */,
+				ABEC440F1CEB189200C40CC1 /* ComplexTableViewController.m in Sources */,
 				AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */,
 				ABEC44061CEB012800C40CC1 /* BasicTableViewController.m in Sources */,
 				ABD40EE41CD3382C00C4ECDE /* MLBridgeBlock.m in Sources */,

@@ -12,7 +12,7 @@
 #import "MLPercentInteractiveTransition.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
-@interface ViewController ()
+@interface ViewController ()<UINavigationControllerDelegate>
 @property(nonatomic ,strong)MLSubmit *submit;
 @property(nonatomic, strong)MLPercentInteractiveTransition *percent;
 @property(nonatomic, strong)SecondViewController *secondViewController;
@@ -64,11 +64,14 @@
 //    self.percent = [[MLPercentInteractiveTransition alloc]init                               ];
 //    [self.percent addPopGesture:toController];
 //    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
-    [self pushViewcontroller:self.secondViewController animationType:_pop];
+    /**
+     *  仿原始调用，简单的不能再简单
+     */
+    [self pushViewcontroller:self.secondViewController animationType:_push];
 }
-
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
+        // 只用作示例，方便演示，pop或者dismiss动画方式完全可以写在本身调用上。
         _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePush Type:_pop];
     }
     return _secondViewController;

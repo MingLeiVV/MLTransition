@@ -29,8 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
     [self setUp];
     
 }
@@ -38,7 +36,7 @@
     return  YES;
 }
 - (void)setUp {
-
+    self.title = @"点击屏幕返回";
     UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Home"]];
     
     self.imageView = imageView;
@@ -49,7 +47,6 @@
     imageView.frame = self.view.bounds;
     
     self.imageView.userInteractionEnabled = YES;
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
     
     tap.numberOfTapsRequired = 1;

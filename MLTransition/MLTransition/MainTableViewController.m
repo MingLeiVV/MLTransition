@@ -38,5 +38,11 @@
         basicVC.title = @"Basic Sample";
         [self.navigationController pushViewController:basicVC animated:YES];
     }
+    if (indexPath.row == 1) {
+        UIStoryboard *complex = [UIStoryboard storyboardWithName:@"Complex" bundle:nil];
+        UIViewController *complexVC = [complex instantiateInitialViewController];
+        complexVC.title = @"Complex Sample";
+        [self.navigationController pushViewController:complexVC animated:YES];
+    }
 }
 @end

@@ -75,7 +75,7 @@ static const char *directionKey = "directionKey";
 }
 #pragma mark - privateMethod
 - (void)transitionSetting:(UIViewController *)toController {
-    if (self.animationType == UIViewAnimationTypeFlip) {
+    if (self.animationType == UIViewAnimationTypeFlipPage) {
         self.percentInteractive = [MLPercentInteractiveTransition new];
         [self.percentInteractive addPopGesture:toController];
     }
@@ -111,6 +111,8 @@ static const char *directionKey = "directionKey";
 
     return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
+
+
 #pragma mark - Synthesis
 - (void)setAnimationType:(UIViewAnimationType)animationType {
     objc_setAssociatedObject(self, animationTypeKey, @(animationType), OBJC_ASSOCIATION_ASSIGN);
