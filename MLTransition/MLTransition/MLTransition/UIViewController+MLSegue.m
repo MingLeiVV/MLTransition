@@ -9,7 +9,6 @@
 #import "UIViewController+MLSegue.h"
 #import "MLPercentInteractiveTransition.h"
 #import <objc/runtime.h>
-
 NSString *const kMLTransitionFromRight = @"kMLTransitionFromRight";
 NSString *const kMLTransitionFromLeft = @"kMLTransitionFromLeft";
 NSString *const kMLTransitionFromTop = @"kMLTransitionFromTop";
@@ -19,7 +18,6 @@ NSString *const kMLTransitionFromBottom = @"kMLTransitionFromBottom";
 @property(nonatomic ,copy) void(^block)();
 @property(nonatomic ,copy) void(^animation)(UIView *containerView,UIView *fromView,UIView *toView,Completion completion);
 @property(nonatomic, assign)UIViewAnimationType animationType;
-@property(nonatomic, strong)MLPercentInteractiveTransition *percentInteractive;
 @end
 static const char *blockKey = "blockKey";
 static const char *animationKey = "animationKey";
@@ -31,6 +29,7 @@ static const char *directionKey = "directionKey";
 - (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion{
     viewController.transitioningDelegate = self;
     self.animationType = animationType;
+    [self transitionSetting:viewController];
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
@@ -42,11 +41,14 @@ static const char *directionKey = "directionKey";
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animationType = animationType;
+    [self transitionSetting:viewController];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 - (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType {
     __weak typeof(self) weakSelf = self;
-    weakSelf.navigationController.delegate = self;
+    if (!weakSelf.navigationController.delegate) {
+         weakSelf.navigationController.delegate = self;   
+    }
     self.animationType = animationType;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -69,16 +71,17 @@ static const char *directionKey = "directionKey";
 }
 - (void)popViewcontrollerAnimations:(animationBlock)animations {
     __weak typeof(self) weakSelf = self;
-    weakSelf.navigationController.delegate = self;
+    if (!weakSelf.navigationController.delegate) {
+        weakSelf.navigationController.delegate = self;
+    }
     self.animation = animations;
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - privateMethod
 - (void)transitionSetting:(UIViewController *)toController {
-    if (self.animationType == UIViewAnimationTypeFlipPage) {
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
         self.percentInteractive = [MLPercentInteractiveTransition new];
-        [self.percentInteractive addPopGesture:toController];
-    }
+        [self.percentInteractive addPopGesture:toController popType:self.animationType];
 }
 
 #pragma mark - delegate
@@ -99,8 +102,8 @@ static const char *directionKey = "directionKey";
 }
 
 
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
-    self.navigationController.delegate = nil;
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     if (self.animationType) {
         if (operation == UINavigationControllerOperationPush) {
             return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePush];
@@ -112,7 +115,10 @@ static const char *directionKey = "directionKey";
     return [MLCustomTransition mlTransitionWithAnimations:self.animation];
 }
 
-
+- (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+                          interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController{
+    return self.percentInteractive.interacting ? self.percentInteractive : nil;
+}
 #pragma mark - Synthesis
 - (void)setAnimationType:(UIViewAnimationType)animationType {
     objc_setAssociatedObject(self, animationTypeKey, @(animationType), OBJC_ASSOCIATION_ASSIGN);

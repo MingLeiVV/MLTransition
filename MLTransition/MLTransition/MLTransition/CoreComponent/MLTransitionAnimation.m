@@ -31,12 +31,11 @@
 // 此方法必须实现
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     
-    return 0;
+    return 2;
 }
 // 关键方法，所有动画在这里实现
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    
-    UIView *containerView = [transitionContext containerView];
+   UIView *containerView = [transitionContext containerView];
     UIView *fromView = nil;
     UIView *toView = nil;
     UIViewController *toVc =[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -51,8 +50,17 @@
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
         [containerView addSubview:toView];
-    animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^{
-        [transitionContext completeTransition:YES];
+    
+    animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^BOOL{
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        if ([transitionContext transitionWasCancelled]) {
+            return NO;
+        }
+        if (_jumpType == UIViewControllerJumpTypeDismiss || _jumpType == UIViewControllerJumpTypePop) {
+            toVc.navigationController.delegate = nil;
+        }
+        return YES;
+
     }];
     animationBlock(containerView,fromView,toView,toVc,fromVc);
 }

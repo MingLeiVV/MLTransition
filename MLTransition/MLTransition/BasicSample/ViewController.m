@@ -12,9 +12,8 @@
 #import "MLPercentInteractiveTransition.h"
 #define UISCREEN [UIScreen mainScreen].bounds.size
 
-@interface ViewController ()<UINavigationControllerDelegate>
+@interface ViewController ()
 @property(nonatomic ,strong)MLSubmit *submit;
-@property(nonatomic, strong)MLPercentInteractiveTransition *percent;
 @property(nonatomic, strong)SecondViewController *secondViewController;
 @property(nonatomic, assign)UIViewAnimationType push;
 @property(nonatomic, assign)UIViewAnimationType pop;
@@ -36,8 +35,8 @@
     [super viewDidLoad];
     [self initBackGroundImage];
     [self creatSubmit];
-    
 }
+
 - (void)initBackGroundImage {
     UIImageView *bgImgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:bgImgView];
@@ -67,8 +66,10 @@
     /**
      *  仿原始调用，简单的不能再简单
      */
+//    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
     [self pushViewcontroller:self.secondViewController animationType:_push];
 }
+
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
         // 只用作示例，方便演示，pop或者dismiss动画方式完全可以写在本身调用上。

@@ -10,12 +10,14 @@
 #import "MLTransitionAnimation.h"
 #import "MLCustomTransition.h"
 #define ML_EXTERN extern
+@class MLPercentInteractiveTransition;
 typedef void(^Completion)();
 @interface UIViewController (MLSegue)
 /**
  *  在转场之前设置转场动画的方向,默认是Left
  */
 @property(nonatomic, copy)NSString *direction;
+@property(nonatomic, strong)MLPercentInteractiveTransition *percentInteractive;
 /**
  *  模块转场
  *

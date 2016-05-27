@@ -7,7 +7,9 @@
 //
 
 #import "SecondViewController.h"
+#import "MLPercentInteractiveTransition.h"
 @interface SecondViewController ()
+@property(nonatomic ,strong)MLPercentInteractiveTransition *percent;
 @property(nonatomic ,strong)UIImageView *imageView;
 @property(nonatomic, assign)UIViewControllerJumpType jumpType;
 @property(nonatomic, assign)UIViewAnimationType type;
@@ -47,11 +49,12 @@
     imageView.frame = self.view.bounds;
     
     self.imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
-    
-    tap.numberOfTapsRequired = 1;
-    
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
+//    
+//    tap.numberOfTapsRequired = 1;
+//    
+//    [self.view addGestureRecognizer:tap];
+
 
 }
 - (void)closeCurrentView {

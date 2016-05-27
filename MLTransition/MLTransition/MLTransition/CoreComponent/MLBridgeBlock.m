@@ -9,6 +9,7 @@
 #import "MLBridgeBlock.h"
 #import "UIView+Position.h"
 #import "UIViewController+MLSegue.h"
+#import "MLPercentInteractiveTransition.h"
 #define navigationBar toController.navigationController.navigationBar
 #define Duration 2 // 动画时长
 #define UIScreen_Width [UIScreen mainScreen].bounds.size.width
@@ -74,8 +75,8 @@ UIViewControllerJumpType _jumpType; // 跳转类型
             toView.alpha = 1.0;
             navigationBar.alpha = 1.0;
         } completion:^(BOOL finished) {
-            finish();
-            [self animationFinish:fromView toView:toView];
+            BOOL isFinish = finish();
+             [self animationFinish:fromView toView:toView finish:isFinish];
         }];
         
     };
@@ -101,8 +102,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
                 toView.alpha = 1.0;
                 navigationBar.alpha = 1.0;
         } completion:^(BOOL finished) {
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
         }];
     };
     return zoom;
@@ -126,8 +126,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
             toView.alpha = 1.0;
             navigationBar.alpha = 1.0;
         } completion:^(BOOL finished) {
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
         }];
 
     };
@@ -155,8 +154,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
             toView.alpha = 1.0;
             navigationBar.alpha = 1.0;
         } completion:^(BOOL finished) {
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
         }];
     };
     return fall;
@@ -182,8 +180,7 @@ UIViewControllerJumpType _jumpType; // 跳转类型
             toView.alpha = 1.0;
             navigationBar.alpha = 1.0;
         } completion:^(BOOL finished) {
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
         }];
     };
     return slideOut;
@@ -218,8 +215,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         [self updateAnchorPointAndOffset:CGPointMake(0.5, 0.5) view:toView];
         fromView.layer.transform = CATransform3DIdentity;
         toView.layer.transform = CATransform3DIdentity;
-        finish();
-        [self animationFinish:fromView toView:toView];
+         [self animationFinish:fromView toView:toView finish:finish()];
         
     }];
 };
@@ -251,8 +247,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 
         } completion:^(BOOL finished) {
             [containerView addSubview:toView];
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
             
         }];
     };
@@ -277,8 +272,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
                 fromView.alpha = 1.0;
             } completion:^(BOOL finished) {
                 [containerView addSubview:toView];
-                finish();
-                [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
             }];
             
         }];
@@ -299,8 +293,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
             [fromView.layer addAnimation:transition forKey:nil];
         } completion:^(BOOL finished) {
             [containerView addSubview:toView];
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
             
         }];
     };
@@ -320,8 +313,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
             [fromView.layer addAnimation:transition forKey:nil];
         } completion:^(BOOL finished) {
             [containerView addSubview:toView];
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
             
         }];
     };
@@ -341,8 +333,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         } completion:^(BOOL finished) {
             fromView.layer.transform = CATransform3DIdentity;
             toView.layer.transform = CATransform3DIdentity;
-            finish();
-            [self animationFinish:fromView toView:toView];
+             [self animationFinish:fromView toView:toView finish:finish()];
             
         }];
     };
@@ -351,8 +342,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         toView.alpha = 1.0;
-        finish();
-        [self animationFinish:fromView toView:toView];
+         [self animationFinish:fromView toView:toView finish:finish()];
     };
     return none;
 }
@@ -393,12 +383,20 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
     return CATransform3DMakeScale(1, 0.01, 1);
 }
 // 动画完成后操作
-+ (void)animationFinish:(UIView *)fromView toView:(UIView *)toView {
-    fromView.alpha = 1.0;
-    toView.alpha = 1.0;
-    [fromView removeFromSuperview];
-    [toView.layer removeAllAnimations];
-    [fromView.layer removeAllAnimations];
++ (void)animationFinish:(UIView *)fromView toView:(UIView *)toView finish:(BOOL)finish {
+    if (finish) {
+        fromView.alpha = 1.0;
+        toView.alpha = 1.0;
+        [fromView removeFromSuperview];
+        [toView.layer removeAllAnimations];
+        [fromView.layer removeAllAnimations];
+    }else {
+        fromView.alpha = 1.0;
+        toView.alpha = 0.0;
+        [toView.layer removeAllAnimations];
+        [fromView.layer removeAllAnimations];
+    }
+
 }
 // 改变layer锚点
 + (void)updateAnchorPointAndOffset:(CGPoint)anchorPoint view:(UIView *)view{

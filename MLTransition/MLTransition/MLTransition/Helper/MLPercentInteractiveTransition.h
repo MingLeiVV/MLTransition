@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MLTransition.h"
 @interface MLPercentInteractiveTransition : UIPercentDrivenInteractiveTransition
 @property(nonatomic,assign)BOOL interacting;
-- (void)addPushGesture:(UIViewController *)viewController;
-- (void)addPopGesture:(UIViewController *)viewController;
+- (void)addPopGesture:(UIViewController *)viewController popType:(UIViewAnimationType)type;
 @end

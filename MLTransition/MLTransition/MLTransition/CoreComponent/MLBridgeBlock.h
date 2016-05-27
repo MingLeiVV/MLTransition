@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, UIViewControllerJumpType) {
     UIViewControllerJumpTypePresent,
     UIViewControllerJumpTypeDismiss
 };
-typedef void(^completion)();
+typedef BOOL (^completion)();
 typedef void(^animationType)(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController);
 @interface MLBridgeBlock : NSObject
 + (animationType)mlGetAnimationWithType:(UIViewAnimationType)type jumpType:(UIViewControllerJumpType)jumpType completion:(completion)finish;
