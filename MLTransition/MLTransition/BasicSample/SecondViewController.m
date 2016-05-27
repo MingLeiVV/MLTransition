@@ -49,11 +49,11 @@
     imageView.frame = self.view.bounds;
     
     self.imageView.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
-//    
-//    tap.numberOfTapsRequired = 1;
-//    
-//    [self.view addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeCurrentView)];
+    
+    tap.numberOfTapsRequired = 1;
+    
+    [self.view addGestureRecognizer:tap];
 
 
 }

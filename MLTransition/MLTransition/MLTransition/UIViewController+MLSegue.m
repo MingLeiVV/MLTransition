@@ -33,8 +33,9 @@ static const char *directionKey = "directionKey";
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
-    self.transitioningDelegate = self;
-    self.animationType = animationType;
+    if (!self.transitioningDelegate) {
+        self.transitioningDelegate = self;
+    }
     [self dismissViewControllerAnimated:YES completion:completion];
 }
 - (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType{
@@ -56,10 +57,13 @@ static const char *directionKey = "directionKey";
 - (void)presentViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
     viewController.transitioningDelegate = self;
     self.animation = animations;
+    [self transitionSetting:viewController];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 - (void)dismissViewcontrollerAnimations:(animationBlock)animations {
-    self.transitioningDelegate = self;
+    if (!self.transitioningDelegate) {
+        self.transitioningDelegate = self;
+    }
     self.animation = animations;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -67,6 +71,7 @@ static const char *directionKey = "directionKey";
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animation = animations;
+    [self transitionSetting:viewController];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 - (void)popViewcontrollerAnimations:(animationBlock)animations {
@@ -86,7 +91,6 @@ static const char *directionKey = "directionKey";
 
 #pragma mark - delegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    source.transitioningDelegate = nil;
     if (self.animationType) {
          return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypePresent];
     }
@@ -94,7 +98,6 @@ static const char *directionKey = "directionKey";
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    dismissed.transitioningDelegate = nil;
     if (self.animationType) {
          return [MLTransitionAnimation mlTransitionWithAnimationType:self.animationType jumpType:UIViewControllerJumpTypeDismiss];
     }
@@ -117,6 +120,9 @@ static const char *directionKey = "directionKey";
 
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController{
+    return self.percentInteractive.interacting ? self.percentInteractive : nil;
+}
+- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
     return self.percentInteractive.interacting ? self.percentInteractive : nil;
 }
 #pragma mark - Synthesis

@@ -52,12 +52,19 @@
         [containerView addSubview:toView];
     
     animationType animationBlock = [MLBridgeBlock mlGetAnimationWithType:_type jumpType:_jumpType completion:^BOOL{
+        
+        if (_jumpType == UIViewControllerJumpTypePop || _jumpType == UIViewControllerJumpTypeDismiss) {
+            // 设置delegate为空的目的
+            // 1.当只做pop的转场时，下次push会野指针（认真想想为什么）
+            // 2.内存优化
+            toVc.navigationController.delegate = nil;
+            toVc.transitioningDelegate = nil;
+        }
+        // 转场动画完成标记
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        
         if ([transitionContext transitionWasCancelled]) {
             return NO;
-        }
-        if (_jumpType == UIViewControllerJumpTypeDismiss || _jumpType == UIViewControllerJumpTypePop) {
-            toVc.navigationController.delegate = nil;
         }
         return YES;
 

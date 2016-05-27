@@ -230,6 +230,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
             [fromView addSubview:toView];
         }else {
             fromView.alpha = 1.0;
+            toView.alpha = 1.0;
             [containerView addSubview:toView];
         }
         CATransition *transition = [CATransition animation];
