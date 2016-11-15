@@ -18,6 +18,7 @@ NSString *const kMLTransitionFromBottom = @"kMLTransitionFromBottom";
 @property(nonatomic ,copy) void(^block)();
 @property(nonatomic ,copy) void(^animation)(UIView *containerView,UIView *fromView,UIView *toView,Completion completion);
 @property(nonatomic, assign)UIViewAnimationType animationType;
+@property(nonatomic, strong)MLPercentInteractiveTransition *percentInteractive;
 @end
 static const char *blockKey = "blockKey";
 static const char *animationKey = "animationKey";
@@ -33,9 +34,11 @@ static const char *directionKey = "directionKey";
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
-    if (!self.transitioningDelegate) {
-        self.transitioningDelegate = self;
-    }
+//    if (!self.transitioningDelegate) {
+//        self.transitioningDelegate = self;
+//    }
+    self.transitioningDelegate = self;
+    self.animationType = animationType;
     [self dismissViewControllerAnimated:YES completion:completion];
 }
 - (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType{
@@ -57,7 +60,6 @@ static const char *directionKey = "directionKey";
 - (void)presentViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
     viewController.transitioningDelegate = self;
     self.animation = animations;
-    [self transitionSetting:viewController];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 - (void)dismissViewcontrollerAnimations:(animationBlock)animations {
@@ -71,7 +73,6 @@ static const char *directionKey = "directionKey";
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animation = animations;
-    [self transitionSetting:viewController];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 - (void)popViewcontrollerAnimations:(animationBlock)animations {

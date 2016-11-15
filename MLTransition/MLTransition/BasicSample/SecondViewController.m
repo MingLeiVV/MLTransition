@@ -61,7 +61,7 @@
     if (_jumpType == UIViewControllerJumpTypePush) {
         [self popViewcontrollerAnimationType:_type];
     }else if(_jumpType == UIViewControllerJumpTypePresent){
-         [self dismissViewcontrollerAnimationType:_type completion:nil];   
+         [self dismissViewcontrollerAnimationType:_type completion:nil];
     }
 }
 @end

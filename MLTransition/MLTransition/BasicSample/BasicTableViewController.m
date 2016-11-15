@@ -59,7 +59,11 @@
         case 10:
             [self.navigationController pushViewController:[ViewController viewControllerWithPushType:UIViewAnimationTypeBlinds popType:UIViewAnimationTypeBlinds] animated:YES];
             break;
+        case 11:
+            [self.navigationController pushViewController:[ViewController viewControllerWithPushType:UIViewAnimationTypeTile popType:UIViewAnimationTypeTile] animated:YES];
+            break;
             }
+    
 }
 
 @end

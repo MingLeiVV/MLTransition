@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"MLTransition";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -42,6 +42,12 @@
         UIStoryboard *complex = [UIStoryboard storyboardWithName:@"Complex" bundle:nil];
         UIViewController *complexVC = [complex instantiateInitialViewController];
         complexVC.title = @"Complex Sample";
+        [self.navigationController pushViewController:complexVC animated:YES];
+    }
+    if (indexPath.row == 2) {
+        UIStoryboard *complex = [UIStoryboard storyboardWithName:@"Senior" bundle:nil];
+        UIViewController *complexVC = [complex instantiateInitialViewController];
+        complexVC.title = @"Senior Sample";
         [self.navigationController pushViewController:complexVC animated:YES];
     }
 }

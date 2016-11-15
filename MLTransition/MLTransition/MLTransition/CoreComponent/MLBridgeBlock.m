@@ -51,10 +51,15 @@ UIViewControllerJumpType _jumpType; // 跳转类型
         case UIViewAnimationTypeStack:
             return [self Stack:finish];
             break;
-            case UIViewAnimationTypeBlinds:
+        case UIViewAnimationTypeBlinds:
             return [self Blinds:finish];
             break;
-            
+        case UIViewAnimationTypeTile:
+            return [self Tile:finish];
+            break;
+        default:
+            return [self None:finish];
+            break;
     }
     return [self None:finish];
 }
@@ -339,6 +344,23 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         }];
     };
     return Stack;
+}
++ (animationType)Tile:(completion)finish {
+    animationType Tile = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
+        CGRect toViewFrame = toView.frame;
+        toView.frame = CGRectMake(0, 0, 20, 20);;
+        fromView.alpha = 0.5;
+        toView.alpha = 0.3;
+        [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            toView.alpha = 1;
+            toView.frame = toViewFrame;
+        } completion:^(BOOL finished) {
+            fromView.alpha = 1.0;
+            [self animationFinish:fromView toView:toView finish:finish()];
+            
+        }];
+    };
+    return Tile;
 }
 + (animationType)None:(completion)finish {
     animationType none = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){

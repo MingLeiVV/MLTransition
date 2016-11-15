@@ -34,6 +34,8 @@
     UIView *containerView = [transitionContext containerView];
     UIView *fromView = nil;
     UIView *toView = nil;
+    UIViewController *toVc =[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     if (isIOS8) {
         
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
@@ -44,6 +46,10 @@
         toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
     }
     Completion completion = ^(){
+        toVc.navigationController.delegate = nil;
+        toVc.transitioningDelegate = nil;
+        fromVc.navigationController.delegate = nil;
+        fromVc.transitioningDelegate = nil;
         [self animationFinish:fromView toView:toView];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     };

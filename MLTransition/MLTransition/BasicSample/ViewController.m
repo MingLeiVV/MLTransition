@@ -51,7 +51,7 @@
     self.submit = submit;
 //    submit.backgroundColor = [UIColor colorWithRed:1 green:0.f/255.0f blue:128.0f/255.0f alpha:1];
 //    [submit setBackgroundImage:[UIImage imageNamed:@"button"] forState:UIControlStateNormal];
-    
+//    
 //    [submit setTitle:@"login" forState:UIControlStateNormal];
     
     [submit addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
@@ -66,14 +66,15 @@
     /**
      *  仿原始调用，简单的不能再简单
      */
-//    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
-    [self pushViewcontroller:self.secondViewController animationType:_push];
+    self.direction = kMLTransitionFromTop;
+    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
+//    [self pushViewcontroller:self.secondViewController animationType:_push];
 }
 
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
         // 只用作示例，方便演示，pop或者dismiss动画方式完全可以写在本身调用上。
-        _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePush Type:_pop];
+        _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePresent Type:_pop];
     }
     return _secondViewController;
 }
