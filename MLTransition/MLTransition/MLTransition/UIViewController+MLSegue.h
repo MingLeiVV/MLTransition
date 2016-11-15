@@ -18,17 +18,32 @@ typedef void(^Completion)();
  */
 @property(nonatomic, copy)NSString *direction;
 /**
+ *  组合转场
+ *  适用于自定义手势转场
+ *  @param viewController 跳转的控制器
+ *  @param presentAnimationType  present动画类型
+ *  @param dismissAnimationType     dismiss动画类型
+ */
+- (void)combinationTranstion:(UIViewController *)viewController
+        presentAnimationType:(UIViewAnimationType)present
+        dismissAnimationType:(UIViewAnimationType)dismiss;
+
+/**
  *  模块转场
  *
  *  @param viewController 跳转的控制器
  *  @param animationType  动画类型
  *  @param completion     转场结束后操作
  */
-- (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion;
+- (void)presentViewcontroller:(UIViewController *)viewController
+                animationType:(UIViewAnimationType)animationType
+                   completion:(Completion)completion;
 
-- (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion;
+- (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType
+                                completion:(Completion)completion;
 
-- (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType;
+- (void)pushViewcontroller:(UIViewController *)viewController
+             animationType:(UIViewAnimationType)animationType;
 
 - (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType;
 
@@ -39,11 +54,13 @@ typedef void(^Completion)();
  *  @param viewController 跳转的控制器
  *  @param animations     动画block块
  */
-- (void)presentViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations;
+- (void)presentViewcontroller:(UIViewController *)viewController
+                   animations:(animationBlock)animations;
 
 - (void)dismissViewcontrollerAnimations:(animationBlock)animations;
 
-- (void)pushViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations;;
+- (void)pushViewcontroller:(UIViewController *)viewController
+                animations:(animationBlock)animations;;
 
 - (void)popViewcontrollerAnimations:(animationBlock)animations;
 

@@ -67,14 +67,15 @@
      *  仿原始调用，简单的不能再简单
      */
     self.direction = kMLTransitionFromTop;
-    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
-//    [self pushViewcontroller:self.secondViewController animationType:_push];
+//    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
+//    [self combinationTranstion:self.secondViewController presentAnimationType:UIViewAnimationTypeStack dismissAnimationType:UIViewAnimationTypeRipple];
+    [self pushViewcontroller:self.secondViewController animationType:_push];
 }
 
 - (SecondViewController *)secondViewController {
     if (!_secondViewController) {
         // 只用作示例，方便演示，pop或者dismiss动画方式完全可以写在本身调用上。
-        _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePresent Type:_pop];
+        _secondViewController = [SecondViewController viewControllerWithJump:UIViewControllerJumpTypePush Type:_pop];
     }
     return _secondViewController;
 }

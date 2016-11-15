@@ -7,10 +7,3 @@
 //
 
 #import "UIViewController+MLSegue.h"
-//typedef void (^Completion)();
-//@interface MLTransition : NSObject <UIViewControllerAnimatedTransitioning>
-//
-//
-//- (instancetype)initTransitionDuration:(CFTimeInterval)transitionT formViewAlpha:(CGFloat)formAlpha toViewAlpha:(CGFloat)toAlpha isDismiss:(BOOL)isDismiss completion:(Completion)completion;
-//
-//@end

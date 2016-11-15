@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C7548851DDB090B00569DAE /* MLFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7548821DDB090B00569DAE /* MLFileManager.m */; };
+		8C7548861DDB090B00569DAE /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7548841DDB090B00569DAE /* UIView+Position.m */; };
 		AB07DA201CFC232700B38C6A /* CellForTransitionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB07DA1F1CFC232700B38C6A /* CellForTransitionTableViewController.m */; };
 		AB07DA271CFC276200B38C6A /* MLFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB07DA251CFC276200B38C6A /* MLFeedCell.m */; };
 		AB07DA281CFC276200B38C6A /* MLFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB07DA261CFC276200B38C6A /* MLFeedCell.xib */; };
 		AB07DA2B1CFC2B9300B38C6A /* MLFeedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AB07DA2A1CFC2B9300B38C6A /* MLFeedEntity.m */; };
 		AB07DA2D1CFC2D6D00B38C6A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = AB07DA2C1CFC2D6D00B38C6A /* data.json */; };
-		AB07DA301CFC2DF700B38C6A /* MLFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB07DA2F1CFC2DF700B38C6A /* MLFileManager.m */; };
 		AB07DA401CFD8BB200B38C6A /* MLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB07DA3F1CFD8BB200B38C6A /* MLTextViewController.m */; };
 		AB1B963E1BF18C7B00966746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B963D1BF18C7B00966746 /* main.m */; };
 		AB1B96411BF18C7B00966746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1B96401BF18C7B00966746 /* AppDelegate.m */; };
@@ -29,7 +30,6 @@
 		ABD40EE71CD3382C00C4ECDE /* MLPercentInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40ED81CD3382C00C4ECDE /* MLPercentInteractiveTransition.m */; };
 		ABD40EE81CD3382C00C4ECDE /* MLSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDA1CD3382C00C4ECDE /* MLSphere.m */; };
 		ABD40EE91CD3382C00C4ECDE /* MLSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDC1CD3382C00C4ECDE /* MLSubmit.m */; };
-		ABD40EEA1CD3382C00C4ECDE /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EDE1CD3382C00C4ECDE /* UIView+Position.m */; };
 		ABD40EF21CD3621400C4ECDE /* UIViewController+MLSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD40EF11CD3621400C4ECDE /* UIViewController+MLSegue.m */; };
 		ABEC43FD1CEB008C00C40CC1 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEC43F91CEB008C00C40CC1 /* SecondViewController.m */; };
 		ABEC43FE1CEB008C00C40CC1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEC43FB1CEB008C00C40CC1 /* ViewController.m */; };
@@ -58,6 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C7548811DDB090B00569DAE /* MLFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileManager.h; sourceTree = "<group>"; };
+		8C7548821DDB090B00569DAE /* MLFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileManager.m; sourceTree = "<group>"; };
+		8C7548831DDB090B00569DAE /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
+		8C7548841DDB090B00569DAE /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
 		AB07DA1E1CFC232700B38C6A /* CellForTransitionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellForTransitionTableViewController.h; sourceTree = "<group>"; };
 		AB07DA1F1CFC232700B38C6A /* CellForTransitionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellForTransitionTableViewController.m; sourceTree = "<group>"; };
 		AB07DA241CFC276200B38C6A /* MLFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFeedCell.h; sourceTree = "<group>"; };
@@ -66,8 +70,6 @@
 		AB07DA291CFC2B9300B38C6A /* MLFeedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFeedEntity.h; sourceTree = "<group>"; };
 		AB07DA2A1CFC2B9300B38C6A /* MLFeedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFeedEntity.m; sourceTree = "<group>"; };
 		AB07DA2C1CFC2D6D00B38C6A /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		AB07DA2E1CFC2DF700B38C6A /* MLFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileManager.h; sourceTree = "<group>"; };
-		AB07DA2F1CFC2DF700B38C6A /* MLFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileManager.m; sourceTree = "<group>"; };
 		AB07DA3E1CFD8BB200B38C6A /* MLTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTextViewController.h; sourceTree = "<group>"; };
 		AB07DA3F1CFD8BB200B38C6A /* MLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTextViewController.m; sourceTree = "<group>"; };
 		AB1B96391BF18C7B00966746 /* MLTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,8 +101,6 @@
 		ABD40EDA1CD3382C00C4ECDE /* MLSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSphere.m; sourceTree = "<group>"; };
 		ABD40EDB1CD3382C00C4ECDE /* MLSubmit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSubmit.h; sourceTree = "<group>"; };
 		ABD40EDC1CD3382C00C4ECDE /* MLSubmit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSubmit.m; sourceTree = "<group>"; };
-		ABD40EDD1CD3382C00C4ECDE /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
-		ABD40EDE1CD3382C00C4ECDE /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
 		ABD40EDF1CD3382C00C4ECDE /* MLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransition.h; sourceTree = "<group>"; };
 		ABD40EF01CD3621400C4ECDE /* UIViewController+MLSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MLSegue.h"; sourceTree = "<group>"; };
 		ABD40EF11CD3621400C4ECDE /* UIViewController+MLSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MLSegue.m"; sourceTree = "<group>"; };
@@ -143,6 +143,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C7548801DDB090B00569DAE /* Commen */ = {
+			isa = PBXGroup;
+			children = (
+				8C7548811DDB090B00569DAE /* MLFileManager.h */,
+				8C7548821DDB090B00569DAE /* MLFileManager.m */,
+				8C7548831DDB090B00569DAE /* UIView+Position.h */,
+				8C7548841DDB090B00569DAE /* UIView+Position.m */,
+			);
+			path = Commen;
+			sourceTree = "<group>";
+		};
 		AB1B96301BF18C7B00966746 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +181,7 @@
 				ABEC440C1CEB187F00C40CC1 /* ComplexSample */,
 				ABEC43F51CEB008C00C40CC1 /* BasicSample */,
 				ABD40ECE1CD3382C00C4ECDE /* MLTransition */,
+				8C7548801DDB090B00569DAE /* Commen */,
 				AB1B963C1BF18C7B00966746 /* Supporting Files */,
 			);
 			path = MLTransition;
@@ -263,10 +275,6 @@
 				ABD40EDA1CD3382C00C4ECDE /* MLSphere.m */,
 				ABD40EDB1CD3382C00C4ECDE /* MLSubmit.h */,
 				ABD40EDC1CD3382C00C4ECDE /* MLSubmit.m */,
-				ABD40EDD1CD3382C00C4ECDE /* UIView+Position.h */,
-				ABD40EDE1CD3382C00C4ECDE /* UIView+Position.m */,
-				AB07DA2E1CFC2DF700B38C6A /* MLFileManager.h */,
-				AB07DA2F1CFC2DF700B38C6A /* MLFileManager.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -438,7 +446,6 @@
 				ABEC44031CEB00FB00C40CC1 /* MainTableViewController.m in Sources */,
 				AB07DA201CFC232700B38C6A /* CellForTransitionTableViewController.m in Sources */,
 				ABEC43FD1CEB008C00C40CC1 /* SecondViewController.m in Sources */,
-				ABD40EEA1CD3382C00C4ECDE /* UIView+Position.m in Sources */,
 				AB07DA271CFC276200B38C6A /* MLFeedCell.m in Sources */,
 				ABD40EE61CD3382C00C4ECDE /* MLTransitionAnimation.m in Sources */,
 				ABD40EE81CD3382C00C4ECDE /* MLSphere.m in Sources */,
@@ -449,10 +456,11 @@
 				ABEC44061CEB012800C40CC1 /* BasicTableViewController.m in Sources */,
 				AB07DA2B1CFC2B9300B38C6A /* MLFeedEntity.m in Sources */,
 				ABD40EE41CD3382C00C4ECDE /* MLBridgeBlock.m in Sources */,
+				8C7548861DDB090B00569DAE /* UIView+Position.m in Sources */,
 				AB07DA401CFD8BB200B38C6A /* MLTextViewController.m in Sources */,
 				AB5596181CFBEFE50071FB1B /* SeniorTableViewController.m in Sources */,
 				ABD40EF21CD3621400C4ECDE /* UIViewController+MLSegue.m in Sources */,
-				AB07DA301CFC2DF700B38C6A /* MLFileManager.m in Sources */,
+				8C7548851DDB090B00569DAE /* MLFileManager.m in Sources */,
 				AB1B963E1BF18C7B00966746 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

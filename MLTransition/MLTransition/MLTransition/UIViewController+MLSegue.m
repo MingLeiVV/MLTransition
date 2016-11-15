@@ -26,22 +26,32 @@ static const char *animationTypeKey = "animationTypeKey";
 static const char *percentInteractiveKey = "percentInteractiveKey";
 static const char *directionKey = "directionKey";
 @implementation UIViewController (MLSegue)
+
+// combination
+- (void)combinationTranstion:(UIViewController *)viewController presentAnimationType:(UIViewAnimationType)present dismissAnimationType:(UIViewAnimationType)dismiss {
+    viewController.transitioningDelegate = self;
+    self.animationType = present;
+    [self transitionSetting:viewController];
+    viewController.percentInteractive.type = dismiss;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
 #pragma mark - publicMethod
-- (void)presentViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType completion:(Completion)completion{
+- (void)presentViewcontroller:(UIViewController *)viewController
+                animationType:(UIViewAnimationType)animationType
+                   completion:(Completion)completion{
     viewController.transitioningDelegate = self;
     self.animationType = animationType;
     [self transitionSetting:viewController];
     [self presentViewController:viewController animated:YES completion:completion];
 }
 - (void)dismissViewcontrollerAnimationType:(UIViewAnimationType)animationType completion:(Completion)completion{
-//    if (!self.transitioningDelegate) {
-//        self.transitioningDelegate = self;
-//    }
     self.transitioningDelegate = self;
     self.animationType = animationType;
     [self dismissViewControllerAnimated:YES completion:completion];
 }
-- (void)pushViewcontroller:(UIViewController *)viewController animationType:(UIViewAnimationType)animationType{
+- (void)pushViewcontroller:(UIViewController *)viewController
+             animationType:(UIViewAnimationType)animationType{
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animationType = animationType;
@@ -50,14 +60,13 @@ static const char *directionKey = "directionKey";
 }
 - (void)popViewcontrollerAnimationType:(UIViewAnimationType)animationType {
     __weak typeof(self) weakSelf = self;
-    if (!weakSelf.navigationController.delegate) {
-         weakSelf.navigationController.delegate = self;   
-    }
+    weakSelf.navigationController.delegate = self;
     self.animationType = animationType;
     [self.navigationController popViewControllerAnimated:YES];
 }
 // Custom Animation
-- (void)presentViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
+- (void)presentViewcontroller:(UIViewController *)viewController
+                   animations:(animationBlock)animations {
     viewController.transitioningDelegate = self;
     self.animation = animations;
     [self presentViewController:viewController animated:YES completion:nil];
@@ -69,7 +78,8 @@ static const char *directionKey = "directionKey";
     self.animation = animations;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)pushViewcontroller:(UIViewController *)viewController animations:(animationBlock)animations {
+- (void)pushViewcontroller:(UIViewController *)viewController
+                animations:(animationBlock)animations {
     __weak typeof(self) weakSelf = self;
     weakSelf.navigationController.delegate = self;
     self.animation = animations;
@@ -86,8 +96,8 @@ static const char *directionKey = "directionKey";
 #pragma mark - privateMethod
 - (void)transitionSetting:(UIViewController *)toController {
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-        self.percentInteractive = [MLPercentInteractiveTransition new];
-        [self.percentInteractive addPopGesture:toController popType:self.animationType];
+        toController.percentInteractive = [MLPercentInteractiveTransition new];
+        [toController.percentInteractive addPopGesture:toController popType:self.animationType];
 }
 
 #pragma mark - delegate

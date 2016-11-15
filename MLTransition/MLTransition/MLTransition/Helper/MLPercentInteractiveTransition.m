@@ -11,7 +11,6 @@
 
 @interface MLPercentInteractiveTransition ()
 @property(nonatomic, strong)UIViewController *targetVc;
-@property(nonatomic, assign)UIViewAnimationType type;
 @end
 @implementation MLPercentInteractiveTransition
 
