@@ -17,6 +17,12 @@ typedef void(^Completion)();
  *  在转场之前设置转场动画的方向,默认是Left
  */
 @property(nonatomic, copy)NSString *direction;
+
+/**
+ *  @param spring 弹性
+ *  在转场之前设置转场动画的方式是否为弹性,默认是NO
+ */
+@property(nonatomic, assign)BOOL spring;
 /**
  *  组合转场
  *  适用于自定义手势转场

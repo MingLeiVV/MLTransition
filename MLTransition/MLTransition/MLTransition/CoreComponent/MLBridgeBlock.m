@@ -89,26 +89,40 @@ UIViewControllerJumpType _jumpType; // 跳转类型
 }
 + (animationType)Zoom:(completion)finish {
     animationType zoom = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
-        CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+//        CABasicAnimation *windowSpecial   = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+//        
+//        windowSpecial.fromValue           = @(0.01);
+//        
+//        windowSpecial.toValue             = @(1);
+//        
+//        windowSpecial.duration = Duration - 1;
+//        
+//        windowSpecial.repeatCount         = 1;
+//        windowSpecial.removedOnCompletion = NO;
+//        [toView.layer addAnimation:windowSpecial forKey:windowSpecial.keyPath];
         fromView.alpha = 0.5;
         toView.alpha = 0.5;
         navigationBar.alpha = 0.0;
-        windowSpecial.fromValue           = @(0.01);
-        
-        windowSpecial.toValue             = @(1);
-        
-        windowSpecial.duration = Duration - 1;
-        
-        windowSpecial.repeatCount         = 1;
-        windowSpecial.removedOnCompletion = NO;
-         [toView.layer addAnimation:windowSpecial forKey:windowSpecial.keyPath];
-        [UIView animateWithDuration:Duration animations:^{
+        toView.transform = CGAffineTransformMakeScale(0.2, 0.2);
+        if (fromController.spring) {
+            [UIView animateWithDuration:.5f delay:0 usingSpringWithDamping:.6f initialSpringVelocity:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 fromView.alpha = 0.0;
                 toView.alpha = 1.0;
                 navigationBar.alpha = 1.0;
-        } completion:^(BOOL finished) {
-             [self animationFinish:fromView toView:toView finish:finish()];
-        }];
+                toView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            } completion:^(BOOL finished) {
+                [self animationFinish:fromView toView:toView finish:finish()];
+            }];
+        }else {
+            [UIView animateWithDuration:Duration animations:^{
+                fromView.alpha = 0.0;
+                toView.alpha = 1.0;
+                navigationBar.alpha = 1.0;
+                toView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            } completion:^(BOOL finished) {
+                [self animationFinish:fromView toView:toView finish:finish()];
+            }];
+        }
     };
     return zoom;
 }
@@ -142,25 +156,39 @@ UIViewControllerJumpType _jumpType; // 跳转类型
     animationType fall = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
             [self transitionSeting:toController];
         CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
+//        fromView.alpha = 1.0;
+//        toView.alpha = 0.3;
+//        navigationBar.alpha = 0.0;
+//        position.fromValue           = @(-UIScreen_Height);
+//        position.toValue             = @(movePosition);
+//        position.duration = Duration;
+//        position.repeatCount         = 1;
+//        position.removedOnCompletion = NO;
+//        [toView.layer addAnimation:position forKey:position.keyPath];
+        
+        // 对导航条和tabBar条做相对应的处理
+//        [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeFall] forKey:position.keyPath];
         fromView.alpha = 1.0;
         toView.alpha = 0.3;
         navigationBar.alpha = 0.0;
-        position.fromValue           = @(-UIScreen_Height);
-        position.toValue             = @(movePosition);
-        position.duration = Duration;
-        position.repeatCount         = 1;
-        position.removedOnCompletion = NO;
-        [toView.layer addAnimation:position forKey:position.keyPath];
-        
-        // 对导航条和tabBar条做相对应的处理
-        [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeFall] forKey:position.keyPath];
-        
-        [UIView animateWithDuration:Duration animations:^{
-            toView.alpha = 1.0;
-            navigationBar.alpha = 1.0;
-        } completion:^(BOOL finished) {
-             [self animationFinish:fromView toView:toView finish:finish()];
-        }];
+        toView.y = -UIScreen_Height;
+        if (fromController.spring) {
+            [UIView animateWithDuration:.5f delay:0 usingSpringWithDamping:.6f initialSpringVelocity:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                toView.y = 0;
+                toView.alpha = 1.0;
+                navigationBar.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                [self animationFinish:fromView toView:toView finish:finish()];
+            }];
+        }else {
+            [UIView animateWithDuration:Duration animations:^{
+                toView.y = 0;
+                toView.alpha = 1.0;
+                navigationBar.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                 [self animationFinish:fromView toView:toView finish:finish()];
+            }];
+        }
     };
     return fall;
 }
@@ -187,6 +215,8 @@ UIViewControllerJumpType _jumpType; // 跳转类型
         } completion:^(BOOL finished) {
              [self animationFinish:fromView toView:toView finish:finish()];
         }];
+        
+        
     };
     return slideOut;
 
@@ -413,11 +443,15 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
         [fromView removeFromSuperview];
         [toView.layer removeAllAnimations];
         [fromView.layer removeAllAnimations];
+        fromView.transform = CGAffineTransformIdentity;
+        toView.transform = CGAffineTransformIdentity;
     }else {
         fromView.alpha = 1.0;
         toView.alpha = 0.0;
         [toView.layer removeAllAnimations];
         [fromView.layer removeAllAnimations];
+        fromView.transform = CGAffineTransformIdentity;
+        toView.transform = CGAffineTransformIdentity;
     }
 
 }

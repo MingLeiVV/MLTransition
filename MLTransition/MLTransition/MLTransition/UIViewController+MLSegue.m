@@ -25,6 +25,7 @@ static const char *animationKey = "animationKey";
 static const char *animationTypeKey = "animationTypeKey";
 static const char *percentInteractiveKey = "percentInteractiveKey";
 static const char *directionKey = "directionKey";
+static const char *springKey = "springKey";
 @implementation UIViewController (MLSegue)
 
 // combination
@@ -174,6 +175,12 @@ static const char *directionKey = "directionKey";
 }
 - (NSString *)direction {
     return objc_getAssociatedObject(self, directionKey);
+}
+- (void)setSpring:(BOOL)spring {
+objc_setAssociatedObject(self, springKey, @(spring), OBJC_ASSOCIATION_ASSIGN);
+}
+- (BOOL)spring {
+    return objc_getAssociatedObject(self, springKey);
 }
 @end
 

@@ -67,6 +67,7 @@
      *  仿原始调用，简单的不能再简单
      */
     self.direction = kMLTransitionFromTop;
+    self.spring = YES;
 //    [self presentViewcontroller:self.secondViewController animationType:_push completion:nil];
 //    [self combinationTranstion:self.secondViewController presentAnimationType:UIViewAnimationTypeStack dismissAnimationType:UIViewAnimationTypeRipple];
     [self pushViewcontroller:self.secondViewController animationType:_push];
