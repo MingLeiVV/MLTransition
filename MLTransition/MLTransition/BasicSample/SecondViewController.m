@@ -58,6 +58,7 @@
 
 }
 - (void)closeCurrentView {
+//    self.spring = YES;
     if (_jumpType == UIViewControllerJumpTypePush) {
         [self popViewcontrollerAnimationType:_type];
     }else if(_jumpType == UIViewControllerJumpTypePresent){

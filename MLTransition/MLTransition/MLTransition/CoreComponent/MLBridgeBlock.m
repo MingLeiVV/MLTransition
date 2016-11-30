@@ -195,27 +195,55 @@ UIViewControllerJumpType _jumpType; // 跳转类型
 + (animationType)SlideOut:(completion)finish {
     animationType slideOut = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         [self transitionSeting:toController];
-        CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
+//        CABasicAnimation *position   = [CABasicAnimation animationWithKeyPath:@"position.y"];
+//        fromView.alpha = 1.0;
+//        toView.alpha = 0.3;
+//        navigationBar.alpha = 0.0;
+//        position.fromValue           = @(movePosition);
+//        position.toValue             = @(-UIScreen_Height);
+//        position.duration = Duration;
+//        position.repeatCount         = 1;
+//        position.removedOnCompletion = NO;
+//        [fromView.layer addAnimation:position forKey:position.keyPath];
+//        // 对导航条和tabBar条做相对应的处理
+//        [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeSlideOut] forKey:position.keyPath];
+//        
+//        [UIView animateWithDuration:Duration animations:^{
+//            fromView.alpha = 0.0;
+//            toView.alpha = 1.0;
+//            navigationBar.alpha = 1.0;
+//        } completion:^(BOOL finished) {
+//             [self animationFinish:fromView toView:toView finish:finish()];
+//        }];
         fromView.alpha = 1.0;
-        toView.alpha = 0.3;
+        toView.alpha = 0.0;
         navigationBar.alpha = 0.0;
-        position.fromValue           = @(movePosition);
-        position.toValue             = @(-UIScreen_Height);
-        position.duration = Duration;
-        position.repeatCount         = 1;
-        position.removedOnCompletion = NO;
-        [fromView.layer addAnimation:position forKey:position.keyPath];
-        // 对导航条和tabBar条做相对应的处理
-        [navigationBar.layer addAnimation:[self getNavigationBar:UIViewAnimationTypeSlideOut] forKey:position.keyPath];
-        
-        [UIView animateWithDuration:Duration animations:^{
-            fromView.alpha = 0.0;
-            toView.alpha = 1.0;
-            navigationBar.alpha = 1.0;
-        } completion:^(BOOL finished) {
-             [self animationFinish:fromView toView:toView finish:finish()];
-        }];
-        
+        fromView.y = 0;
+        if (fromController.spring) {
+            fromView.y = -10;
+            [UIView animateWithDuration:.2f delay:0 usingSpringWithDamping:.6f initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                fromView.y = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:.5f animations:^{
+                    fromView.alpha = 0.0;
+                    toView.alpha = 1.0;
+                    fromView.y = -UIScreen_Height;
+                    navigationBar.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    [self animationFinish:fromView toView:toView finish:finish()];
+                }];
+            }];
+        }else {
+            [UIView animateWithDuration:Duration animations:^{
+                fromView.y = -UIScreen_Height;
+                fromView.alpha = 0.0;
+                toView.alpha = 1.0;
+                navigationBar.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                [self animationFinish:fromView toView:toView finish:finish()];
+            }];
+        }
+
         
     };
     return slideOut;
@@ -440,6 +468,8 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
     if (finish) {
         fromView.alpha = 1.0;
         toView.alpha = 1.0;
+        fromView.y = 0;
+        toView.y = 0;
         [fromView removeFromSuperview];
         [toView.layer removeAllAnimations];
         [fromView.layer removeAllAnimations];
@@ -448,6 +478,8 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
     }else {
         fromView.alpha = 1.0;
         toView.alpha = 0.0;
+        fromView.y = 0;
+        toView.y = 0;
         [toView.layer removeAllAnimations];
         [fromView.layer removeAllAnimations];
         fromView.transform = CGAffineTransformIdentity;
