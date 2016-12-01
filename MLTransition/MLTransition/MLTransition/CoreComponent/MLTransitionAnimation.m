@@ -40,6 +40,16 @@
     UIView *toView = nil;
     UIViewController *toVc =[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    if ([fromVc isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nav = (UINavigationController *)fromVc;
+        fromVc = nav.topViewController;
+        
+    }
+    if ([toVc isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nav = (UINavigationController *)toVc;
+        toVc = nav.topViewController;
+        
+    }
     if (isIOS8) {
         
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];

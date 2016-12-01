@@ -406,7 +406,7 @@ animationType FlipPage = ^(UIView *containerView,UIView *fromView,UIView *toView
 + (animationType)Tile:(completion)finish {
     animationType Tile = ^(UIView *containerView,UIView *fromView,UIView *toView,UIViewController *toController,UIViewController *fromController){
         CGRect toViewFrame = toView.frame;
-        toView.frame = CGRectMake(0, 0, 20, 20);;
+        //TODU: 重绘做平铺样式
         fromView.alpha = 0.5;
         toView.alpha = 0.3;
         [UIView animateWithDuration:Duration delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
