@@ -11,6 +11,7 @@
 
 @interface MLPercentInteractiveTransition ()
 @property(nonatomic, strong)UIViewController *targetVc;
+@property(nonatomic, strong)UIScreenEdgePanGestureRecognizer *panGes;
 @end
 @implementation MLPercentInteractiveTransition
 
@@ -22,6 +23,7 @@
     self.type = type;
     UIScreenEdgePanGestureRecognizer *edgeGes = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgeGesPan:)];
     edgeGes.edges = UIRectEdgeLeft;
+    self.panGes = edgeGes;
     [viewController.view addGestureRecognizer:edgeGes];
 }
 
@@ -49,6 +51,7 @@
             self.interacting = NO;
             if (percent > 0.5) {
                 [self finishInteractiveTransition];
+                [_targetVc.view removeGestureRecognizer:_panGes];
             }else{
                 [self cancelInteractiveTransition];
             }
